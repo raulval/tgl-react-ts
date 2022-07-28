@@ -38,6 +38,12 @@ export const FormMain = styled.main`
       }
     }
 
+    span {
+      font: normal bold 16px "IBM Plex Sans", sans-serif;
+      color: #d5423f;
+      margin-left: 20px;
+    }
+
     .forget-pwd {
       margin-top: 27px;
       margin-right: 27px;
@@ -62,10 +68,12 @@ export const FormMain = styled.main`
       align-items: center;
       justify-content: center;
 
-      a {
+      button {
         font: italic normal bold 35px "IBM Plex Sans", sans-serif;
         color: #b5c401;
-        text-decoration: none;
+        border: none;
+        background: none;
+        cursor: pointer;
         transition: all 0.2s;
 
         :hover {
