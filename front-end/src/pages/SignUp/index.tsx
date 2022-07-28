@@ -1,11 +1,21 @@
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Form from "../../components/Form";
 import Slogan from "../../components/Slogan";
+import { api } from "../../services/api";
 import { FormContainer } from "./styles";
 
 const SignUp = () => {
-  const handleSubmit = (data: {}) => {
-    console.log(data);
+  const handleSubmit = async (data: {}) => {
+    try {
+      const response = await toast.promise(api.post("user/create", data), {
+        pending: "Signing up...",
+        success: "User created successfully",
+      });
+      console.log(response.data);
+    } catch (error: any) {
+      toast.error(error.response.data.error.message);
+    }
   };
 
   return (
