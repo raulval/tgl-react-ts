@@ -25,7 +25,7 @@ export default class BetsController {
       .select('id', 'user_id', 'game_id', 'choosen_numbers', 'price', 'created_at')
       .where('user_id', id)
       .whereHas('type', (scope) => scope.filter(request.qs()))
-      .preload('type', (scope) => scope.select('id', 'type'))
+      .preload('type', (scope) => scope.select('id', 'type', 'color'))
 
     return bets
   }
