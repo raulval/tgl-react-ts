@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginMain = styled.main`
+export const FormMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@ export const LoginMain = styled.main`
       }
     }
 
-    .login-btn {
+    .submit-btn {
       margin-top: 40px;
       margin-bottom: 40px;
       display: flex;

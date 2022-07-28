@@ -1,13 +1,13 @@
-import LoginForm from "../../components/LoginForm";
+import Form from "../../components/Form";
 import Slogan from "../../components/Slogan";
-import { LoginContainer } from "./styles";
+import { FormContainer } from "./styles";
 
 const Login = () => {
   return (
-    <LoginContainer>
+    <FormContainer>
       <Slogan />
-      <LoginForm />
-    </LoginContainer>
+      <Form login />
+    </FormContainer>
   );
 };
 
