@@ -1,4 +1,4 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Form from "../../components/Form";
@@ -10,8 +10,8 @@ const Reset = () => {
   const handleSubmit = async (data: {}) => {
     try {
       const response = await toast.promise(api.post("reset", data), {
-        pending: "Resetting...",
-        success: "Password reset successfully",
+        pending: "Sending reset link...",
+        success: "Reset link sent successfully",
       });
       console.log(response.data);
     } catch (error: any) {
@@ -23,7 +23,6 @@ const Reset = () => {
     <FormContainer>
       <Slogan />
       <Form reset onSubmit={handleSubmit} />
-      <ToastContainer limit={3} />
     </FormContainer>
   );
 };
