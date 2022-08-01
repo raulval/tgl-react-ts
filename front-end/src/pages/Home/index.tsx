@@ -30,14 +30,45 @@ interface Bets {
   };
 }
 
+interface Games {
+  id: number;
+  type: string;
+  description: string;
+  range: number;
+  price: number;
+  max_number: number;
+  color: string;
+}
+
 const Home = () => {
   const [bets, setBets] = useState([]);
+  const [games, setGames] = useState([]);
+  const [gameType, setGameType] = useState<string>();
+
   const token =
     "MQ.XNbjj7Gpeh3cTITtnyWC9o1sRNQO0wO3vgHa5C2yKg6Jy4-LRFNVT6oCtUim";
 
-  const config = {
+  let config: {} = {
     headers: { Authorization: `Bearer ${token}` },
   };
+
+  if (gameType) {
+    config = {
+      headers: { Authorization: `Bearer ${token}` },
+      params: { "type[]": `${gameType}` },
+    };
+  }
+
+  useEffect(() => {
+    api
+      .get("cart_games")
+      .then((res) => {
+        setGames(res.data.types);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     api
@@ -49,7 +80,7 @@ const Home = () => {
         console.log(err);
         toast.error(err.response.data.errors[0].message);
       });
-  }, []);
+  }, [gameType]);
 
   return (
     <HomeContainer>
@@ -58,7 +89,20 @@ const Home = () => {
         <RecentGames>Recent Games</RecentGames>
         <FiltersContainer>
           <FiltersText>Filters</FiltersText>
-          <GameButton title="Test" />
+          {games.length > 0 ? (
+            games.map((game: Games) => {
+              return (
+                <GameButton
+                  key={game.id}
+                  onClick={() => setGameType(game.type)}
+                  type={game.type}
+                  color={game.color}
+                />
+              );
+            })
+          ) : (
+            <NoBet>No game found, create one first</NoBet>
+          )}
         </FiltersContainer>
         <NewBetLink to="/new-bet">
           New Bet <ArrowRight />

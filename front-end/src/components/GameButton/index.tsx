@@ -1,14 +1,17 @@
 import { GamesButton } from "./styles";
 
 interface GameButtonProps {
-  title: string;
-  color?: string;
+  type: string;
+  color: string;
+  onClick: () => void;
 }
 
 const GameButton = (props: GameButtonProps) => {
   return (
     <div>
-      <GamesButton>{props.title}</GamesButton>
+      <GamesButton onClick={props.onClick} color={props.color}>
+        {props.type}
+      </GamesButton>
     </div>
   );
 };
