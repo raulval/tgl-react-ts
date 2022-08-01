@@ -80,7 +80,14 @@ export const ArrowRight = styled(MdEast)`
 
 export const BetsPlayedContainer = styled.div`
   width: 100vw;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   padding-left: 8.6rem;
+  margin-top: 35px;
+  overflow-y: auto;
+`;
+
+export const NoBet = styled.p`
+  font: italic normal bold 20px "IBM Plex Sans", sans-serif;
 `;

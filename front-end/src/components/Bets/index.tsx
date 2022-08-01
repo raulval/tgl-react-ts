@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   BetDateAndPrice,
   BetGameType,
@@ -7,28 +8,37 @@ import {
   Separator,
 } from "./styles";
 
-type GameData = {
+interface GameData {
   id: number;
-  type: string;
-  description: string;
-  range: number;
+  user_id: number;
+  game_id: number;
+  choosen_numbers: string;
   price: number;
-  max_number: number;
-  color: string;
-};
+  created_at: Date;
+  type: {
+    id: number;
+    type: string;
+    color: string;
+  };
+}
 
 interface BetsProps {
-  data?: GameData;
+  data: GameData;
 }
 
 const Bets = (props: BetsProps) => {
   return (
     <BetsContainer>
-      <Separator />
+      <Separator color={props.data.type.color} />
       <BetsWrapper>
-        <BetNumbers>01, 02,04,05,06,07,09,15,17,20,21,22,23,24,25</BetNumbers>
-        <BetDateAndPrice>30/11/2020 - (R$ 2,50)</BetDateAndPrice>
-        <BetGameType>Lotofácil</BetGameType>
+        <BetNumbers>{props.data.choosen_numbers}</BetNumbers>
+        <BetDateAndPrice>
+          {moment(props.data.created_at).format("L")} - (R${" "}
+          {props.data.price.toFixed(2).replace(".", ",")})
+        </BetDateAndPrice>
+        <BetGameType color={props.data.type.color}>
+          {props.data.type.type}
+        </BetGameType>
       </BetsWrapper>
     </BetsContainer>
   );
