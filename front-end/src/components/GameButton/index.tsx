@@ -3,14 +3,16 @@ import { GamesButton } from "./styles";
 interface GameButtonProps {
   type: string;
   color: string;
-  onFocus: () => void;
-  onBlur: () => void;
+  onClick?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 const GameButton = (props: GameButtonProps) => {
   return (
     <div>
       <GamesButton
+        onClick={props.onClick}
         onFocus={props.onFocus}
         onBlur={props.onBlur}
         color={props.color}
