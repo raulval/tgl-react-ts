@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Bets from "../../components/Bets";
 import GameButton from "../../components/GameButton";
@@ -41,21 +43,29 @@ interface Games {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const [bets, setBets] = useState([]);
   const [games, setGames] = useState([]);
   const [gameType, setGameType] = useState<string>();
+  const { isLogged, userData } = useSelector((state: any) => state.user);
 
-  const token =
-    "MQ.XNbjj7Gpeh3cTITtnyWC9o1sRNQO0wO3vgHa5C2yKg6Jy4-LRFNVT6oCtUim";
+  useEffect(() => {
+    if (!isLogged) {
+      toast.error("You must be logged in to see this page");
+      navigate("/");
+    }
+  }, []);
 
-  let config: {} = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  let config: {};
 
   if (gameType) {
     config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${userData.token.token}` },
       params: { "type[]": `${gameType}` },
+    };
+  } else {
+    config = {
+      headers: { Authorization: `Bearer ${userData.token.token}` },
     };
   }
 

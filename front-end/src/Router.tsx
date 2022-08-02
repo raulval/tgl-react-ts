@@ -1,13 +1,15 @@
+import { Provider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Reset from "./pages/Reset";
 import SignUp from "./pages/SignUp";
+import store from "./store";
 
 const Router = () => {
   return (
-    <div>
+    <Provider store={store}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/reset" element={<Reset />} />
@@ -15,7 +17,7 @@ const Router = () => {
         <Route path="/home" element={<Home />} />
       </Routes>
       <ToastContainer limit={3} />
-    </div>
+    </Provider>
   );
 };
 

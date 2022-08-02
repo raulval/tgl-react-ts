@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/userSlice";
 import {
   ArrowRight,
   LeftContainer,
@@ -19,6 +21,7 @@ interface NavbarProps {
 }
 
 const NavBar = (props: NavbarProps) => {
+  const dispatch = useDispatch();
   const [extendNavbar, setExtendNavbar] = useState(false);
 
   return (
@@ -34,7 +37,7 @@ const NavBar = (props: NavbarProps) => {
         <RightContainer>
           <NavbarLinkContainer>
             <NavbarLink to="#">Account</NavbarLink>
-            <NavbarLink to="/">
+            <NavbarLink to="/" onClick={() => dispatch(logout())}>
               Log out <ArrowRight />
             </NavbarLink>
             <OpenLinksButton
