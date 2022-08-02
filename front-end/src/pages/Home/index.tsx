@@ -46,24 +46,26 @@ const Home = () => {
   const navigate = useNavigate();
   const [bets, setBets] = useState([]);
   const [games, setGames] = useState([]);
-  const [gameType, setGameType] = useState<string>();
+  const [gameType, setGameType] = useState<string | null>();
   const { isLogged, userData } = useSelector((state: any) => state.user);
 
   useEffect(() => {
     if (!isLogged) {
-      toast.error("You must be logged in to see this page");
       navigate("/");
+      toast.error("You must be logged in to see this page", {
+        toastId: "loginError1",
+      });
     }
   }, []);
 
   let config: {};
 
-  if (gameType) {
+  if (gameType && isLogged) {
     config = {
       headers: { Authorization: `Bearer ${userData.token.token}` },
       params: { "type[]": `${gameType}` },
     };
-  } else {
+  } else if (isLogged) {
     config = {
       headers: { Authorization: `Bearer ${userData.token.token}` },
     };
@@ -75,10 +77,8 @@ const Home = () => {
       .then((res) => {
         setGames(res.data.types);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      .catch((err) => {});
+  }, [isLogged]);
 
   useEffect(() => {
     api
@@ -86,10 +86,7 @@ const Home = () => {
       .then((res) => {
         setBets(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.response.data.errors[0].message);
-      });
+      .catch((err) => {});
   }, [gameType]);
 
   return (
@@ -104,7 +101,8 @@ const Home = () => {
               return (
                 <GameButton
                   key={game.id}
-                  onClick={() => setGameType(game.type)}
+                  onFocus={() => setGameType(game.type)}
+                  onBlur={() => setGameType(null)}
                   type={game.type}
                   color={game.color}
                 />

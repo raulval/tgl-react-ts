@@ -18,6 +18,11 @@ export const GamesButton = styled.button`
   font: italic normal bold 14px "IBM Plex Sans", sans-serif;
   color: ${(props: ColorProps) => props.color};
 
+  &:focus {
+    background-color: ${(props: ColorProps) => props.color};
+    color: #fff;
+  }
+
   @media (max-width: 1138px) {
     margin-left: 15px;
   }
