@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Bets from "../../components/Bets";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
 import { api } from "../../services/api";
+import { getGames } from "../../store/gameSlice";
 import {
   ArrowRight,
   BetsPlayedContainer,
@@ -44,6 +45,7 @@ interface Games {
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [bets, setBets] = useState([]);
   const [games, setGames] = useState([]);
   const [gameType, setGameType] = useState<string | null>();
@@ -76,9 +78,10 @@ const Home = () => {
       .get("cart_games")
       .then((res) => {
         setGames(res.data.types);
+        dispatch(getGames(res.data.types));
       })
       .catch((err) => {});
-  }, [isLogged]);
+  }, []);
 
   useEffect(() => {
     api
@@ -112,7 +115,7 @@ const Home = () => {
             <NoBet>No game found, create one first</NoBet>
           )}
         </FiltersContainer>
-        <NewBetLink to="/new-bet">
+        <NewBetLink to="/bet">
           New Bet <ArrowRight />
         </NewBetLink>
       </HomeHeader>
