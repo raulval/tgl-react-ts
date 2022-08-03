@@ -12,6 +12,7 @@ import {
 import { IoTrashOutline } from "react-icons/io5";
 
 interface BetsProps {
+  game_id: number;
   numbers: number[];
   color: string;
   type: string;

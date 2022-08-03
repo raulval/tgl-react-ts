@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BetNumbers from "../../components/BetNumbers";
 import CartBets from "../../components/CartBets";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
+import { api } from "../../services/api";
+import { setBets } from "../../store/betSlice";
 import { ArrowRight, NoBet } from "../Home/styles";
+
 import {
   AddToCartButton,
   BetContainer,
@@ -41,6 +45,7 @@ interface Games {
 }
 
 interface CartBets {
+  game_id: number;
   numbers: number[];
   color: string;
   type: string;
@@ -48,17 +53,27 @@ interface CartBets {
 }
 
 const Bet = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { gamesData } = useSelector((state: { games: any }) => state.games);
   const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [cartBets, setCartBets] = useState<CartBets[]>([]);
-  // const newBet = {
-  //   games: [
-  //     {
-  //       game_id:
-  //     }
-  //   ],
-  // }
+  const { isLogged, userData } = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/");
+      toast.error("You must be logged in to see this page", {
+        toastId: "loginError1",
+      });
+    }
+  }),
+    [isLogged];
+
+  const config = {
+    headers: { Authorization: `Bearer ${userData.token.token}` },
+  };
 
   const onClickGameButton = (game: Games) => {
     setSelectedGame(game);
@@ -111,6 +126,7 @@ const Bet = () => {
   const onClickAddToCart = () => {
     if (selectedNumbers.length === selectedGame.max_number) {
       const addToCartData = {
+        game_id: selectedGame.id,
         numbers: selectedNumbers,
         color: selectedGame.color,
         type: selectedGame.type,
@@ -127,7 +143,31 @@ const Bet = () => {
     setCartBets(cartBets.filter((cart) => cart !== bet));
   };
 
-  const onClickSaveBets = async () => {};
+  const onClickSaveBets = async () => {
+    const betData = {
+      games: cartBets.map((bet) => {
+        return {
+          game_id: bet.game_id,
+          numbers: bet.numbers,
+        };
+      }),
+    };
+    try {
+      const response = await toast.promise(
+        api.post("bet/new-bet", betData, config),
+        {
+          pending: "Saving bets...",
+          success: "Bets saved successfully",
+        }
+      );
+      console.log(response.data);
+      setCartBets([]);
+      dispatch(setBets(response.data));
+      // navigate("/home");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <>
@@ -190,6 +230,7 @@ const Bet = () => {
                     <CartBets
                       key={bet.numbers.toString()}
                       onDelete={() => onDeleteBet(bet)}
+                      game_id={bet.game_id}
                       numbers={bet.numbers}
                       color={bet.color}
                       type={bet.type}
