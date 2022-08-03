@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import BetNumbers from "../../components/BetNumbers";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
@@ -47,18 +49,24 @@ const Bet = () => {
   };
 
   const onClickBetNumber = (e: any) => {
-    if (selectedNumbers.includes(Number(e.target.value))) {
-      setSelectedNumbers(
-        selectedNumbers.filter((number) => number !== Number(e.target.value))
-      );
-    } else {
+    if (selectedNumbers.length < selectedGame.max_number) {
       const newSelectedNumbers = [
         ...selectedNumbers,
         Number(e.target.value),
       ].sort((a, b) => a - b);
       setSelectedNumbers(newSelectedNumbers);
+    } else if (selectedNumbers.includes(Number(e.target.value))) {
+      setSelectedNumbers(
+        selectedNumbers.filter((number) => number !== Number(e.target.value))
+      );
+    } else {
+      toast.error(`You can only select ${selectedGame.max_number} numbers`);
     }
   };
+
+  console.log(selectedNumbers);
+
+  const onClickCompleteGame = () => {};
 
   const onClickClearGame = () => {
     setSelectedNumbers([]);
@@ -102,7 +110,9 @@ const Bet = () => {
           </NumbersContainer>
 
           <ButtonsContainer>
-            <CompleteGameButton>Complete game</CompleteGameButton>
+            <CompleteGameButton onClick={onClickCompleteGame}>
+              Complete game
+            </CompleteGameButton>
             <ClearGameButton onClick={onClickClearGame}>
               Clear game
             </ClearGameButton>
