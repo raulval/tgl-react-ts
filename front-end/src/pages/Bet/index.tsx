@@ -50,27 +50,58 @@ const Bet = () => {
 
   const onClickBetNumber = (e: any) => {
     if (selectedNumbers.length < selectedGame.max_number) {
-      const newSelectedNumbers = [
-        ...selectedNumbers,
-        Number(e.target.value),
-      ].sort((a, b) => a - b);
-      setSelectedNumbers(newSelectedNumbers);
-    } else if (selectedNumbers.includes(Number(e.target.value))) {
-      setSelectedNumbers(
-        selectedNumbers.filter((number) => number !== Number(e.target.value))
-      );
-    } else {
-      toast.error(`You can only select ${selectedGame.max_number} numbers`);
+      if (selectedNumbers.includes(Number(e.target.value))) {
+        setSelectedNumbers(
+          selectedNumbers.filter((number) => number !== Number(e.target.value))
+        );
+      } else {
+        const newSelectedNumbers = [
+          ...selectedNumbers,
+          Number(e.target.value),
+        ].sort((a, b) => a - b);
+        setSelectedNumbers(newSelectedNumbers);
+      }
+    } else if (selectedNumbers.length === selectedGame.max_number) {
+      if (selectedNumbers.includes(Number(e.target.value))) {
+        setSelectedNumbers(
+          selectedNumbers.filter((number) => number !== Number(e.target.value))
+        );
+      } else {
+        toast.error(`You can only select ${selectedGame.max_number} numbers`);
+      }
     }
   };
 
-  console.log(selectedNumbers);
-
-  const onClickCompleteGame = () => {};
+  const onClickCompleteGame = () => {
+    let choosenNumbers: number[] = selectedNumbers;
+    const generatesRandomNumber = () => {
+      const randomNumber = Math.floor(Math.random() * selectedGame.range) + 1;
+      if (choosenNumbers.includes(randomNumber)) {
+        generatesRandomNumber();
+      } else {
+        choosenNumbers.push(randomNumber);
+      }
+    };
+    while (choosenNumbers.length < selectedGame.max_number) {
+      generatesRandomNumber();
+    }
+    setSelectedNumbers([...choosenNumbers.sort((a, b) => a - b)]);
+    // setSelectedNumbers([23, 24, 25]);
+  };
 
   const onClickClearGame = () => {
     setSelectedNumbers([]);
   };
+
+  const onClickAddToCart = () => {
+    if (selectedNumbers.length === selectedGame.max_number) {
+      toast.success(`${selectedGame.type} added to cart`);
+    } else {
+      toast.error(`You must select ${selectedGame.max_number} numbers`);
+    }
+  };
+
+  console.log(selectedNumbers);
 
   return (
     <>
@@ -116,7 +147,7 @@ const Bet = () => {
             <ClearGameButton onClick={onClickClearGame}>
               Clear game
             </ClearGameButton>
-            <AddToCartButton>
+            <AddToCartButton onClick={onClickAddToCart}>
               <MdOutlineShoppingCart />
               Add to cart
             </AddToCartButton>
