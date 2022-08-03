@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { useSelector } from "react-redux";
 import BetNumbers from "../../components/BetNumbers";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
 import { ArrowRight, NoBet } from "../Home/styles";
 import {
+  AddToCartButton,
   BetContainer,
   Bold,
+  ButtonsContainer,
   Cart,
   CartBetsContainer,
   CartContainer,
@@ -14,6 +17,8 @@ import {
   CartTitle,
   CartTotalPrice,
   ChooseGameText,
+  ClearGameButton,
+  CompleteGameButton,
   FillBetText,
   GameDescription,
   GamesDiv,
@@ -52,9 +57,11 @@ const Bet = () => {
           <GamesDiv>
             {gamesData.length > 0 ? (
               gamesData.map((game: Games) => {
+                const isActive = selectedGame.type === game.type ? true : false;
                 return (
                   <GameButton
                     key={game.id}
+                    active={isActive}
                     onClick={() => onClickGameButton(game)}
                     type={game.type}
                     color={game.color}
@@ -70,6 +77,15 @@ const Bet = () => {
           <NumbersContainer>
             <BetNumbers range={selectedGame.range}></BetNumbers>
           </NumbersContainer>
+
+          <ButtonsContainer>
+            <CompleteGameButton>Complete game</CompleteGameButton>
+            <ClearGameButton>Clear game</ClearGameButton>
+            <AddToCartButton>
+              <MdOutlineShoppingCart />
+              Add to cart
+            </AddToCartButton>
+          </ButtonsContainer>
         </MainContainer>
 
         <CartContainer>

@@ -5,7 +5,7 @@ export const BetContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100vw;
-  overflow: scroll;
+  overflow: auto;
 
   @media (max-width: 1138px) {
     flex-direction: column;
@@ -57,6 +57,70 @@ export const GameDescription = styled.p`
 `;
 
 export const NumbersContainer = styled.div``;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  margin-top: 44px;
+  margin-bottom: 80px;
+`;
+
+export const CompleteGameButton = styled.button`
+  width: 164px;
+  height: 52px;
+  border: 1px solid #27c383;
+  border-radius: 10px;
+  font: normal normal medium 20px "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  color: #27c383;
+  cursor: pointer;
+  margin-right: 25px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgb(0, 0, 0, 0.1);
+  }
+`;
+
+export const ClearGameButton = styled.button`
+  width: 135px;
+  height: 52px;
+  border: 1px solid #27c383;
+  border-radius: 10px;
+  font: normal normal medium 20px "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: #27c383;
+  margin-right: 150px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgb(0, 0, 0, 0.1);
+  }
+`;
+
+export const AddToCartButton = styled.button`
+  width: 209px;
+  height: 52px;
+  background-color: #27c383;
+  border: 1px solid #27c383;
+  cursor: pointer;
+  border-radius: 10px;
+  font: normal normal bold 16px "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  svg {
+    margin-right: 28px;
+    font-size: 25px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+`;
 
 export const CartContainer = styled.div`
   width: 35vw;
