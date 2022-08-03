@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: #F7F7F7;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   body, input, textarea, button {
