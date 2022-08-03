@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BetNumbers from "../../components/BetNumbers";
+import CartBets from "../../components/CartBets";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
 import { ArrowRight, NoBet } from "../Home/styles";
@@ -39,10 +40,25 @@ interface Games {
   color: string;
 }
 
+interface CartBets {
+  numbers: number[];
+  color: string;
+  type: string;
+  price: number;
+}
+
 const Bet = () => {
   const { gamesData } = useSelector((state: { games: any }) => state.games);
   const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
+  const [cartBets, setCartBets] = useState<CartBets[]>([]);
+  // const newBet = {
+  //   games: [
+  //     {
+  //       game_id:
+  //     }
+  //   ],
+  // }
 
   const onClickGameButton = (game: Games) => {
     setSelectedGame(game);
@@ -86,7 +102,6 @@ const Bet = () => {
       generatesRandomNumber();
     }
     setSelectedNumbers([...choosenNumbers.sort((a, b) => a - b)]);
-    // setSelectedNumbers([23, 24, 25]);
   };
 
   const onClickClearGame = () => {
@@ -95,11 +110,20 @@ const Bet = () => {
 
   const onClickAddToCart = () => {
     if (selectedNumbers.length === selectedGame.max_number) {
-      toast.success(`${selectedGame.type} added to cart`);
+      const addToCartData = {
+        numbers: selectedNumbers,
+        color: selectedGame.color,
+        type: selectedGame.type,
+        price: selectedGame.price,
+      };
+      setCartBets([...cartBets, addToCartData]);
+      setSelectedNumbers([]);
     } else {
       toast.error(`You must select ${selectedGame.max_number} numbers`);
     }
   };
+
+  const onClickSaveBets = async () => {};
 
   console.log(selectedNumbers);
 
@@ -157,11 +181,33 @@ const Bet = () => {
         <CartContainer>
           <Cart>
             <CartTitle>Cart</CartTitle>
-            <CartBetsContainer>No bets yet, make one!</CartBetsContainer>
+            <CartBetsContainer>
+              {cartBets.length > 0 ? (
+                cartBets.map((bet: CartBets) => {
+                  return (
+                    <CartBets
+                      key={bet.numbers.toString()}
+                      numbers={bet.numbers}
+                      color={bet.color}
+                      type={bet.type}
+                      price={bet.price}
+                    />
+                  );
+                })
+              ) : (
+                <NoBet>No bet found, add one first</NoBet>
+              )}
+            </CartBetsContainer>
             <CartTotalPrice>
-              <Bold>Cart</Bold> Total: R$ {}
+              <Bold>Cart</Bold> Total: R${" "}
+              {cartBets.length > 0
+                ? cartBets
+                    .reduce((acc, curr) => acc + curr.price, 0)
+                    .toFixed(2)
+                    .replace(".", ",")
+                : "0,00"}
             </CartTotalPrice>
-            <CartSaveButton>
+            <CartSaveButton onClick={onClickSaveBets}>
               Save <ArrowRight />
             </CartSaveButton>
           </Cart>

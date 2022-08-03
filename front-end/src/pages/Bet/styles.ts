@@ -150,10 +150,10 @@ export const CartTitle = styled.h1`
 `;
 
 export const CartBetsContainer = styled.div`
+  width: 317px;
   max-height: 400px;
-  overflow: auto;
-  margin-left: 17px;
-  margin-right: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const CartTotalPrice = styled.p`
