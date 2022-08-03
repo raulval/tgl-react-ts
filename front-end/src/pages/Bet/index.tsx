@@ -40,9 +40,28 @@ interface Games {
 const Bet = () => {
   const { gamesData } = useSelector((state: { games: any }) => state.games);
   const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
+  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
 
   const onClickGameButton = (game: Games) => {
     setSelectedGame(game);
+  };
+
+  const onClickBetNumber = (e: any) => {
+    if (selectedNumbers.includes(Number(e.target.value))) {
+      setSelectedNumbers(
+        selectedNumbers.filter((number) => number !== Number(e.target.value))
+      );
+    } else {
+      const newSelectedNumbers = [
+        ...selectedNumbers,
+        Number(e.target.value),
+      ].sort((a, b) => a - b);
+      setSelectedNumbers(newSelectedNumbers);
+    }
+  };
+
+  const onClickClearGame = () => {
+    setSelectedNumbers([]);
   };
 
   return (
@@ -75,12 +94,18 @@ const Bet = () => {
           <FillBetText>Fill your bet</FillBetText>
           <GameDescription>{selectedGame.description}</GameDescription>
           <NumbersContainer>
-            <BetNumbers range={selectedGame.range}></BetNumbers>
+            <BetNumbers
+              range={selectedGame.range}
+              onClick={onClickBetNumber}
+              selectedNumbers={selectedNumbers}
+            ></BetNumbers>
           </NumbersContainer>
 
           <ButtonsContainer>
             <CompleteGameButton>Complete game</CompleteGameButton>
-            <ClearGameButton>Clear game</ClearGameButton>
+            <ClearGameButton onClick={onClickClearGame}>
+              Clear game
+            </ClearGameButton>
             <AddToCartButton>
               <MdOutlineShoppingCart />
               Add to cart
