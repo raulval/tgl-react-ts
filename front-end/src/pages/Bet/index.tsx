@@ -123,9 +123,11 @@ const Bet = () => {
     }
   };
 
-  const onClickSaveBets = async () => {};
+  const onDeleteBet = (bet: CartBets) => {
+    setCartBets(cartBets.filter((cart) => cart !== bet));
+  };
 
-  console.log(selectedNumbers);
+  const onClickSaveBets = async () => {};
 
   return (
     <>
@@ -187,6 +189,7 @@ const Bet = () => {
                   return (
                     <CartBets
                       key={bet.numbers.toString()}
+                      onDelete={() => onDeleteBet(bet)}
                       numbers={bet.numbers}
                       color={bet.color}
                       type={bet.type}

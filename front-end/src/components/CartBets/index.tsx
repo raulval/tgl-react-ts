@@ -16,12 +16,13 @@ interface BetsProps {
   color: string;
   type: string;
   price: number;
+  onDelete: () => void;
 }
 
 const CartBets = (props: BetsProps) => {
   return (
     <BetsContainer>
-      <DeleteBetButton>
+      <DeleteBetButton onClick={props.onDelete}>
         <IoTrashOutline />
       </DeleteBetButton>
       <Separator color={props.color} />
