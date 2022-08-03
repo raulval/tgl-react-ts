@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BetNumbers from "../../components/BetNumbers";
 import CartBets from "../../components/CartBets";
+import DeleteModal from "../../components/DeleteModal";
 import GameButton from "../../components/GameButton";
 import NavBar from "../../components/NavBar";
 import { api } from "../../services/api";
@@ -56,10 +57,12 @@ const Bet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { gamesData } = useSelector((state: { games: any }) => state.games);
+  const { isLogged, userData } = useSelector((state: any) => state.user);
   const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [cartBets, setCartBets] = useState<CartBets[]>([]);
-  const { isLogged, userData } = useSelector((state: any) => state.user);
+  const [selectedBet, setSelectedBet] = useState<CartBets | undefined>();
+  const [modalShow, setModalShow] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isLogged) {
@@ -140,7 +143,9 @@ const Bet = () => {
   };
 
   const onDeleteBet = (bet: CartBets) => {
-    setCartBets(cartBets.filter((cart) => cart !== bet));
+    setModalShow(true);
+    setSelectedBet(bet);
+    // setCartBets(cartBets.filter((cart) => cart !== bet));
   };
 
   const onClickSaveBets = async () => {
@@ -160,7 +165,6 @@ const Bet = () => {
           success: "Bets saved successfully",
         }
       );
-      console.log(response.data);
       setCartBets([]);
       dispatch(setBets(response.data));
       // navigate("/home");
@@ -172,6 +176,16 @@ const Bet = () => {
   return (
     <>
       <NavBar />
+      {modalShow && (
+        <DeleteModal
+          setClose={() => setModalShow(false)}
+          deleteBet={() =>
+            setCartBets(cartBets.filter((cart) => cart !== selectedBet))
+          }
+          type={selectedBet?.type}
+          numbers={selectedBet?.numbers}
+        />
+      )}
       <BetContainer>
         <MainContainer>
           <MainTitle>
