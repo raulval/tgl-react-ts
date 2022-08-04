@@ -15,7 +15,6 @@ const SignUp = () => {
         pending: "Signing up...",
         success: "User created successfully",
       });
-      console.log(response.data);
       navigate("/");
     } catch (error: any) {
       toast.error(error.response.data.error.message);

@@ -14,6 +14,11 @@ export const BetsContainer = styled.div`
 
   @media (max-width: 1138px) {
     justify-content: center;
+    width: 20vw;
+  }
+
+  @media (max-width: 880px) {
+    width: 50vw;
   }
 `;
 
@@ -39,7 +44,7 @@ export const DeleteBetButton = styled.button`
 `;
 
 export const Separator = styled.div`
-  width: 4px;
+  min-width: 4px;
   min-height: 60px;
   background-color: ${(props: ColorProps) => props.color};
   border-radius: 100px 0px 0px 100px;

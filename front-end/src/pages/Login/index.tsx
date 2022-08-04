@@ -20,7 +20,6 @@ const Login = () => {
         pending: "Logging in...",
         success: "Logged in successfully",
       });
-      console.log(response.data);
       dispatch(getUser(response.data));
       navigate("/home");
     } catch (error: any) {

@@ -20,6 +20,11 @@ export const MainContainer = styled.div`
   flex-direction: column;
   margin-left: 130px;
   margin-top: 74px;
+
+  @media (max-width: 1138px) {
+    width: 70vw;
+    margin-left: 0;
+  }
 `;
 
 export const MainTitle = styled.h1`
@@ -79,6 +84,10 @@ export const CompleteGameButton = styled.button`
   &:hover {
     background-color: rgb(0, 0, 0, 0.1);
   }
+
+  @media (max-width: 880px) {
+    min-width: 80px;
+  }
 `;
 
 export const ClearGameButton = styled.button`
@@ -95,6 +104,12 @@ export const ClearGameButton = styled.button`
 
   &:hover {
     background-color: rgb(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 880px) {
+    min-width: 80px;
+
+    margin-right: 25px;
   }
 `;
 
@@ -120,6 +135,10 @@ export const AddToCartButton = styled.button`
     display: inline-block;
     vertical-align: middle;
   }
+
+  @media (max-width: 880px) {
+    min-width: 100px;
+  }
 `;
 
 export const CartContainer = styled.div`
@@ -127,6 +146,15 @@ export const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 42px;
+
+  @media (max-width: 1138px) {
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 880px) {
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const Cart = styled.div`

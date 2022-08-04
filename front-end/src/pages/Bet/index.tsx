@@ -145,7 +145,6 @@ const Bet = () => {
   const onDeleteBet = (bet: CartBets) => {
     setModalShow(true);
     setSelectedBet(bet);
-    // setCartBets(cartBets.filter((cart) => cart !== bet));
   };
 
   const onClickSaveBets = async () => {
@@ -167,7 +166,7 @@ const Bet = () => {
       );
       setCartBets([]);
       dispatch(setBets(response.data));
-      // navigate("/home");
+      navigate("/home");
     } catch (error: any) {
       toast.error(error.response.data.message);
     }

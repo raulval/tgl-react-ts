@@ -24,4 +24,9 @@ export const NumberButton = styled.button`
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);
   }
+
+  @media (max-width: 880px) {
+    width: 50px;
+    height: 50px;
+  }
 `;

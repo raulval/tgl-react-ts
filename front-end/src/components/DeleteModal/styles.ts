@@ -12,7 +12,8 @@ export const Modal = styled.div`
   flex-direction: column;
   @media (max-width: 500px) {
     left: 0px;
-    margin: 0px 10px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 `;
 export const ModalContent = styled.div`
@@ -37,6 +38,10 @@ export const ConfirmButton = styled.div`
   width: 200px;
   cursor: pointer;
   background-color: #e95c66;
+
+  @media (max-width: 500px) {
+    width: 120px;
+  }
 `;
 export const CancelButton = styled.div`
   margin: 10px;
@@ -48,6 +53,10 @@ export const CancelButton = styled.div`
   width: 200px;
   cursor: pointer;
   background-color: gray;
+
+  @media (max-width: 500px) {
+    width: 120px;
+  }
 `;
 export const ModalShadow = styled.div`
   position: fixed;

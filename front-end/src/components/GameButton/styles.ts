@@ -28,4 +28,8 @@ export const GamesButton = styled.button`
   @media (max-width: 1138px) {
     margin-left: 15px;
   }
+
+  @media (max-width: 880px) {
+    width: 90px;
+  }
 `;

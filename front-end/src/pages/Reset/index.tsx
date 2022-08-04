@@ -13,7 +13,6 @@ const Reset = () => {
         pending: "Sending reset link...",
         success: "Reset link sent successfully",
       });
-      console.log(response.data);
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
