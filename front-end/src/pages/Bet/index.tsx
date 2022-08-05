@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BetNumbers from "../../components/BetNumbers";
-import CartBets from "../../components/CartBets";
-import DeleteModal from "../../components/DeleteModal";
-import GameButton from "../../components/GameButton";
-import NavBar from "../../components/NavBar";
+import {
+  BetNumbers,
+  CartBets,
+  DeleteModal,
+  GameButton,
+  NavBar,
+} from "../../components";
 import { api } from "../../services/api";
 import { setBets } from "../../store/betSlice";
 import { ArrowRight, NoBet } from "../Home/styles";

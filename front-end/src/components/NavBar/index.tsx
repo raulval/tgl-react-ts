@@ -56,7 +56,7 @@ const NavBar = (props: NavbarProps) => {
             <NavbarLinkExtended to="/home">Home</NavbarLinkExtended>
           )}
           <NavbarLinkExtended to="#">Account</NavbarLinkExtended>
-          <NavbarLinkExtended to="/">
+          <NavbarLinkExtended to="/" onClick={() => dispatch(logout())}>
             Log out <ArrowRight />
           </NavbarLinkExtended>
         </NavbarExtendedContainer>
