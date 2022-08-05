@@ -171,8 +171,8 @@ const Bet = () => {
         }
       );
       setCartBets([]);
-      dispatch(setBets(response.data));
       navigate("/home");
+      dispatch(setBets(response.data));
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
