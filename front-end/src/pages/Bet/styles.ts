@@ -158,7 +158,7 @@ export const CartContainer = styled.div`
 `;
 
 export const Cart = styled.div`
-  width: 317px;
+  width: 340px;
   max-height: 600px;
 
   display: flex;
@@ -193,7 +193,7 @@ export const CartTotalPrice = styled.p`
 `;
 
 export const CartSaveButton = styled.button`
-  width: 316px;
+  width: 338px;
   min-height: 96px;
 
   background-color: #f4f4f4;

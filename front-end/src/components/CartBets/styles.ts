@@ -54,7 +54,7 @@ export const Separator = styled.div`
 export const BetsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 240px;
 `;
 
 export const BetNumbers = styled.p`
@@ -63,7 +63,7 @@ export const BetNumbers = styled.p`
   margin-bottom: 6px;
 
   overflow-wrap: break-word;
-  min-height: min-content;
+  /* min-height: min-content; */
 
   @media (max-width: 1138px) {
     width: 130px;
