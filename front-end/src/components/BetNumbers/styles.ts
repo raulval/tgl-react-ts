@@ -17,7 +17,7 @@ export const NumberButton = styled.button`
   border-radius: 100px;
   border: none;
   cursor: pointer;
-  font: normal normal bold 20px "IBM Plex Sans", sans-serif;
+  font: normal normal bold 20px ${(props) => props.theme.font};
   color: #ffffff;
   transition: all 0.2s;
 

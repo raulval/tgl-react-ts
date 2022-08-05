@@ -8,8 +8,8 @@ export const SloganContainer = styled.aside`
   width: 100vw;
 
   h1 {
-    font: italic normal bold 65px "IBM Plex Sans", sans-serif;
-    color: #707070;
+    font: italic normal bold 65px ${(props) => props.theme.font};
+    color: ${(props) => props.theme.colors.primary.text};
     text-align: center;
     inline-size: 20rem;
     overflow-wrap: break-word;
@@ -18,7 +18,7 @@ export const SloganContainer = styled.aside`
   div {
     width: 144px;
     height: 39px;
-    background-color: #b5c401;
+    background-color: ${(props) => props.theme.colors.primary.main};
     border-radius: 100px;
     display: flex;
     align-items: center;
@@ -27,15 +27,15 @@ export const SloganContainer = styled.aside`
     margin: 30px 0 20px 0;
 
     span {
-      font: italic normal bold 22px "IBM Plex Sans", sans-serif;
+      font: italic normal bold 22px ${(props) => props.theme.font};
       color: #ffffff;
     }
   }
 
   h2 {
     text-align: center;
-    font: italic normal bold 83px "IBM Plex Sans", sans-serif;
-    color: #707070;
+    font: italic normal bold 83px ${(props) => props.theme.font};
+    color: ${(props) => props.theme.colors.primary.text};
     text-transform: uppercase;
   }
 

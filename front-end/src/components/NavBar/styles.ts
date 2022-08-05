@@ -43,13 +43,13 @@ export const RightContainer = styled.div`
 `;
 
 export const Logo = styled.p`
-  font: italic normal bold 44px "IBM Plex Sans", sans-serif;
-  color: #707070;
+  font: italic normal bold 44px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
   margin: 10px;
 `;
 
 export const Selector = styled.div`
-  background-color: #b5c401;
+  background-color: ${(props) => props.theme.colors.primary.main};
   margin-bottom: -12px;
   margin-top: 5px;
   margin-left: -12px;
@@ -59,15 +59,15 @@ export const Selector = styled.div`
 `;
 
 export const NavbarLink = styled(Link)`
-  font: italic normal bold 22px "IBM Plex Sans", sans-serif;
-  color: #707070;
+  font: italic normal bold 22px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
   text-decoration: none;
   margin: 20px;
   transition: all 0.2s;
 
   &:hover {
     transform: scale(1.1);
-    color: #b5c401;
+    color: ${(props) => props.theme.colors.primary.main};
   }
 
   @media (max-width: 1138px) {
@@ -82,15 +82,15 @@ export const ArrowRight = styled(MdEast)`
 `;
 
 export const NavbarLinkExtended = styled(Link)`
-  font: italic normal bold 22px "IBM Plex Sans", sans-serif;
-  color: #707070;
+  font: italic normal bold 22px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
   text-decoration: none;
   margin: 20px;
   transition: all 0.2s;
 
   &:hover {
     transform: scale(1.1);
-    color: #b5c401;
+    color: ${(props) => props.theme.colors.primary.main};
   }
 `;
 
@@ -103,7 +103,7 @@ export const OpenLinksButton = styled.button`
   height: 50px;
   background: none;
   border: none;
-  color: #707070;
+  color: ${(props) => props.theme.colors.primary.text};
   font-size: 45px;
   cursor: pointer;
 

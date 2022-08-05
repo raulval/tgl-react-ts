@@ -16,7 +16,7 @@ export const GamesButton = styled.button<ColorProps>`
 
   cursor: pointer;
   text-align: center;
-  font: italic normal bold 14px "IBM Plex Sans", sans-serif;
+  font: italic normal bold 14px ${(props) => props.theme.font};
   color: ${(props) => (props.active ? "#ffffff" : props.color)};
 
   &:focus {

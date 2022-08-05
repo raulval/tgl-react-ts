@@ -24,8 +24,8 @@ export const HomeHeader = styled.div`
 `;
 
 export const RecentGames = styled.h1`
-  font: italic normal bold 24px "IBM Plex Sans", sans-serif;
-  color: #707070;
+  font: italic normal bold 24px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
   text-transform: uppercase;
   margin-left: 8.6rem;
 
@@ -47,14 +47,14 @@ export const FiltersContainer = styled.div`
 `;
 
 export const FiltersText = styled.p`
-  font: italic normal normal 17px "IBM Plex Sans", sans-serif;
-  color: #868686;
+  font: italic normal normal 17px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.secundary.text};
 `;
 
 export const NewBetLink = styled(Link)`
   margin-left: 34rem;
-  font: italic normal bold 24px "IBM Plex Sans", sans-serif;
-  color: #b5c401;
+  font: italic normal bold 24px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.main};
   text-decoration: none;
   transition: all 0.2s;
 
@@ -89,5 +89,5 @@ export const BetsPlayedContainer = styled.div`
 `;
 
 export const NoBet = styled.p`
-  font: italic normal bold 20px "IBM Plex Sans", sans-serif;
+  font: italic normal bold 20px ${(props) => props.theme.font};
 `;

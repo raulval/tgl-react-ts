@@ -258,7 +258,9 @@ const Bet = () => {
                   );
                 })
               ) : (
-                <NoBet>No bet found, add one first</NoBet>
+                <NoBet style={{ marginLeft: "20px" }}>
+                  No bet found, add one first
+                </NoBet>
               )}
             </CartBetsContainer>
             <CartTotalPrice>

@@ -69,7 +69,7 @@ export const ModalShadow = styled.div`
 `;
 export const ModalBanner = styled.div`
   margin-bottom: 20px;
-  background-color: #27c383;
+  background-color: ${(props) => props.theme.colors.secundary.main};
   color: white;
   padding: 10px;
 `;

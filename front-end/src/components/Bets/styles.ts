@@ -30,8 +30,8 @@ export const BetsWrapper = styled.div`
 `;
 
 export const BetNumbers = styled.p`
-  font: italic normal bold 20px "IBM Plex Sans", sans-serif;
-  color: #868686;
+  font: italic normal bold 20px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.secundary.text};
   margin-bottom: 15px;
 
   overflow-wrap: break-word;
@@ -43,12 +43,12 @@ export const BetNumbers = styled.p`
 `;
 
 export const BetDateAndPrice: any = styled.p`
-  font: normal normal normal 17px "IBM Plex Sans", sans-serif;
-  color: #868686;
+  font: normal normal normal 17px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.secundary.text};
   margin-bottom: 11px;
 `;
 
 export const BetGameType = styled.p`
-  font: italic normal bold 20px "IBM Plex Sans", sans-serif;
+  font: italic normal bold 20px ${(props) => props.theme.font};
   color: ${(props: ColorProps) => props.color};
 `;
