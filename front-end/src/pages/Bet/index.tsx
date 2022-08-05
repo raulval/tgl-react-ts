@@ -140,7 +140,11 @@ const Bet = () => {
       setCartBets([...cartBets, addToCartData]);
       setSelectedNumbers([]);
     } else {
-      toast.error(`You must select ${selectedGame.max_number} numbers`);
+      toast.error(
+        `You must select more ${
+          selectedGame.max_number - selectedNumbers.length
+        } numbers`
+      );
     }
   };
 
