@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { bets } from "services";
 import {
   BetNumbers,
   CartBets,
@@ -11,7 +12,6 @@ import {
   GameButton,
   NavBar,
 } from "../../components";
-import { api } from "../../services/api";
 import { setBets } from "../../store/betSlice";
 import { ArrowRight, NoBet } from "../Home/styles";
 
@@ -58,6 +58,7 @@ interface CartBets {
 const Bet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { newBet } = bets();
   const { gamesData } = useSelector((state: { games: any }) => state.games);
   const { isLogged, userData } = useSelector((state: any) => state.user);
   const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
@@ -163,16 +164,13 @@ const Bet = () => {
       }),
     };
     try {
-      const response = await toast.promise(
-        api.post("bet/new-bet", betData, config),
-        {
-          pending: "Saving bets...",
-          success: "Bets saved successfully",
-        }
-      );
+      const response = await toast.promise(newBet(betData), {
+        pending: "Saving bets...",
+        success: "Bets saved successfully",
+      });
       setCartBets([]);
       navigate("/home");
-      dispatch(setBets(response.data));
+      dispatch(setBets(response.bet));
     } catch (error: any) {
       toast.error(error.response.data.message);
     }

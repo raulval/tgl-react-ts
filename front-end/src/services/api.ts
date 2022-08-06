@@ -6,10 +6,10 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const isToken = false;
+    const token = localStorage.getItem("userToken");
 
-    if (isToken) {
-      config.headers!.Authorization = `Bearer ${isToken}`;
+    if (token) {
+      config.headers!.Authorization = `Bearer ${token}`;
     }
 
     return config;
