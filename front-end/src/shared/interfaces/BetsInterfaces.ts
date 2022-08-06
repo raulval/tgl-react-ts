@@ -20,3 +20,11 @@ interface Bet {
   updated_at: Date;
   id: number;
 }
+
+export interface ICartBets {
+  game_id: number;
+  numbers: number[];
+  color: string;
+  type: string;
+  price: number;
+}

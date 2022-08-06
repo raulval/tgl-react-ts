@@ -10,6 +10,7 @@ import {
 } from "./styles";
 
 import { IoTrashOutline } from "react-icons/io5";
+import { currencyFormat } from "shared/utils";
 
 interface BetsProps {
   game_id: number;
@@ -31,7 +32,7 @@ const CartBets = (props: BetsProps) => {
         <BetNumbers>{props.numbers.toString()}</BetNumbers>
         <TypePriceWrapper>
           <BetGameType color={props.color}>{props.type}</BetGameType>
-          <BetPrice>R$ {props.price.toFixed(2).replace(".", ",")}</BetPrice>
+          <BetPrice>R$ {currencyFormat(props.price)}</BetPrice>
         </TypePriceWrapper>
       </BetsWrapper>
     </BetsContainer>

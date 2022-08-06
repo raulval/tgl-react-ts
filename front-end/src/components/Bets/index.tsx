@@ -1,4 +1,5 @@
 import moment from "moment";
+import { currencyFormat } from "shared/utils";
 import {
   BetDateAndPrice,
   BetGameType,
@@ -34,7 +35,7 @@ const Bets = (props: BetsProps) => {
         <BetNumbers>{props.data.choosen_numbers}</BetNumbers>
         <BetDateAndPrice>
           {moment(props.data.created_at).format("L")} - (R${" "}
-          {props.data.price.toFixed(2).replace(".", ",")})
+          {currencyFormat(props.data.price)})
         </BetDateAndPrice>
         <BetGameType color={props.data.type.color}>
           {props.data.type.type}

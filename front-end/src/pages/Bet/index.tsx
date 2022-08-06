@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { bets } from "services";
+import { Game, ICartBets } from "shared/interfaces";
+import { cartCurrencyFormat } from "shared/utils";
 import {
   BetNumbers,
   CartBets,
@@ -37,34 +39,16 @@ import {
   NumbersContainer,
 } from "./styles";
 
-interface Games {
-  id: number;
-  type: string;
-  description: string;
-  range: number;
-  price: number;
-  max_number: number;
-  color: string;
-}
-
-interface CartBets {
-  game_id: number;
-  numbers: number[];
-  color: string;
-  type: string;
-  price: number;
-}
-
 const Bet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { newBet } = bets();
   const { gamesData } = useSelector((state: { games: any }) => state.games);
   const { isLogged, userData } = useSelector((state: any) => state.user);
-  const [selectedGame, setSelectedGame] = useState<Games>(gamesData[0]);
+  const [selectedGame, setSelectedGame] = useState<Game>(gamesData[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
-  const [cartBets, setCartBets] = useState<CartBets[]>([]);
-  const [selectedBet, setSelectedBet] = useState<CartBets | undefined>();
+  const [cartBets, setCartBets] = useState<ICartBets[]>([]);
+  const [selectedBet, setSelectedBet] = useState<ICartBets | undefined>();
   const [modalShow, setModalShow] = useState<boolean>(false);
 
   useEffect(() => {
@@ -81,7 +65,7 @@ const Bet = () => {
     headers: { Authorization: `Bearer ${userData.token.token}` },
   };
 
-  const onClickGameButton = (game: Games) => {
+  const onClickGameButton = (game: Game) => {
     setSelectedGame(game);
   };
 
@@ -149,7 +133,7 @@ const Bet = () => {
     }
   };
 
-  const onDeleteBet = (bet: CartBets) => {
+  const onDeleteBet = (bet: ICartBets) => {
     setModalShow(true);
     setSelectedBet(bet);
   };
@@ -197,7 +181,7 @@ const Bet = () => {
           <ChooseGameText>Choose a game</ChooseGameText>
           <GamesDiv>
             {gamesData.length > 0 ? (
-              gamesData.map((game: Games) => {
+              gamesData.map((game: Game) => {
                 const isActive = selectedGame.type === game.type ? true : false;
                 return (
                   <GameButton
@@ -242,7 +226,7 @@ const Bet = () => {
             <CartTitle>Cart</CartTitle>
             <CartBetsContainer>
               {cartBets.length > 0 ? (
-                cartBets.map((bet: CartBets) => {
+                cartBets.map((bet: ICartBets) => {
                   return (
                     <CartBets
                       key={bet.numbers.toString()}
@@ -263,12 +247,7 @@ const Bet = () => {
             </CartBetsContainer>
             <CartTotalPrice>
               <Bold>Cart</Bold> Total: R${" "}
-              {cartBets.length > 0
-                ? cartBets
-                    .reduce((acc, curr) => acc + curr.price, 0)
-                    .toFixed(2)
-                    .replace(".", ",")
-                : "0,00"}
+              {cartBets.length > 0 ? cartCurrencyFormat(cartBets) : "0,00"}
             </CartTotalPrice>
             <CartSaveButton onClick={onClickSaveBets}>
               Save <ArrowRight />
