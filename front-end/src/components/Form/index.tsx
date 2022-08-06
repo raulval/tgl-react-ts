@@ -3,20 +3,15 @@ import { useForm } from "react-hook-form";
 import { MdEast, MdWest } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IBodyAuth } from "shared/interfaces";
 import * as yup from "yup";
 import { FormMain } from "./styles";
-
-type SubmitForm = {
-  email?: string;
-  password?: string;
-  name?: string;
-};
 
 interface FormProps {
   login?: boolean;
   reset?: boolean;
   signup?: boolean;
-  onSubmit: (data: SubmitForm) => void;
+  onSubmit: ({ email, password, name }: IBodyAuth) => void;
 }
 
 const validationLogin = yup.object({
@@ -52,7 +47,7 @@ const Form = (props: FormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SubmitForm>({
+  } = useForm<IBodyAuth>({
     resolver: yupResolver(validation),
   });
 

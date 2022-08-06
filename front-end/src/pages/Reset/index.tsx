@@ -1,18 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { auth } from "services";
+import { IBodyAuth } from "shared/interfaces";
 
-import Form from "../../components/Form";
-import Slogan from "../../components/Slogan";
-import { api } from "../../services/api";
+import Form from "components/Form";
+import Slogan from "components/Slogan";
 import { FormContainer } from "./styles";
 
 const Reset = () => {
-  const handleSubmit = async (data: {}) => {
+  const { reset } = auth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async ({ email }: IBodyAuth) => {
     try {
-      const response = await toast.promise(api.post("reset", data), {
-        pending: "Sending reset link...",
-        success: "Reset link sent successfully",
+      const response = await toast.promise(reset({ email }), {
+        pending: "Sending reset email...",
+        success: "Reset email sent successfully",
       });
+      localStorage.setItem("resetToken", response.data.token);
+      navigate(`/new-password`);
     } catch (error: any) {
       toast.error(error.response.data.message);
     }

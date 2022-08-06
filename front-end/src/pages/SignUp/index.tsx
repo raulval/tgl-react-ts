@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import user from "services/user";
+import { IBodyAuth } from "shared/interfaces";
 import Form from "../../components/Form";
 import Slogan from "../../components/Slogan";
-import { api } from "../../services/api";
 import { FormContainer } from "./styles";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { signup } = user();
 
-  const handleSubmit = async (data: {}) => {
+  const handleSubmit = async ({ name, email, password }: IBodyAuth) => {
     try {
-      const response = await toast.promise(api.post("user/create", data), {
+      const response = await toast.promise(signup({ name, email, password }), {
         pending: "Signing up...",
         success: "User created successfully",
       });

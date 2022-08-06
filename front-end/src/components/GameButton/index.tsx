@@ -2,6 +2,7 @@ import { GamesButton } from "./styles";
 
 interface GameButtonProps {
   active?: boolean;
+  notActive?: boolean;
   type: string;
   color: string;
   onClick?: () => void;
@@ -9,17 +10,24 @@ interface GameButtonProps {
   onBlur?: () => void;
 }
 
-const GameButton = (props: GameButtonProps) => {
+const GameButton = ({
+  active,
+  type,
+  color,
+  onClick,
+  onFocus,
+  onBlur,
+}: GameButtonProps) => {
   return (
     <div>
       <GamesButton
-        active={props.active}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onBlur={props.onBlur}
-        color={props.color}
+        active={active}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        color={color}
       >
-        {props.type}
+        {type}
       </GamesButton>
     </div>
   );
