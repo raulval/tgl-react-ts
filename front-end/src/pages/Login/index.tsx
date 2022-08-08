@@ -22,7 +22,7 @@ const Login = () => {
         pending: "Logging in...",
         success: "Logged in successfully",
       });
-      dispatch(getUser(response.data));
+      dispatch(getUser(response.data.user));
       localStorage.setItem("userToken", response.data.token.token);
       navigate("/home");
     } catch (error: any) {

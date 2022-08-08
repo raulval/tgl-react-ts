@@ -36,7 +36,7 @@ const NavBar = (props: NavbarProps) => {
         </LeftContainer>
         <RightContainer>
           <NavbarLinkContainer>
-            <NavbarLink to="#">Account</NavbarLink>
+            <NavbarLink to="/account">Account</NavbarLink>
             <NavbarLink to="/" onClick={() => dispatch(logout())}>
               Log out <ArrowRight />
             </NavbarLink>
@@ -55,7 +55,7 @@ const NavBar = (props: NavbarProps) => {
           {!props.home && (
             <NavbarLinkExtended to="/home">Home</NavbarLinkExtended>
           )}
-          <NavbarLinkExtended to="#">Account</NavbarLinkExtended>
+          <NavbarLinkExtended to="/account">Account</NavbarLinkExtended>
           <NavbarLinkExtended to="/" onClick={() => dispatch(logout())}>
             Log out <ArrowRight />
           </NavbarLinkExtended>

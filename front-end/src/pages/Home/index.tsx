@@ -25,7 +25,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { listGames } = gamesService();
   const { listBets } = betsService();
-  const { isLogged, userData } = useSelector((state: any) => state.user);
+  const { isLogged } = useSelector((state: any) => state.user);
   const [bets, setBets] = useState<IBets[]>([]);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<string[]>([]);

@@ -44,7 +44,7 @@ const Bet = () => {
   const dispatch = useDispatch();
   const { newBet } = bets();
   const { gamesData } = useSelector((state: { games: any }) => state.games);
-  const { isLogged, userData } = useSelector((state: any) => state.user);
+  const { isLogged } = useSelector((state: any) => state.user);
   const [selectedGame, setSelectedGame] = useState<Game>(gamesData[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [cartBets, setCartBets] = useState<ICartBets[]>([]);
@@ -60,10 +60,6 @@ const Bet = () => {
     }
   }),
     [isLogged];
-
-  const config = {
-    headers: { Authorization: `Bearer ${userData.token.token}` },
-  };
 
   const onClickGameButton = (game: Game) => {
     setSelectedGame(game);

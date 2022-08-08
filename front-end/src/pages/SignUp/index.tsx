@@ -1,10 +1,10 @@
+import Form from "components/Form";
+import Slogan from "components/Slogan";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import user from "services/user";
 import { IBodyAuth } from "shared/interfaces";
-import Form from "../../components/Form";
-import Slogan from "../../components/Slogan";
 import { FormContainer } from "./styles";
 
 const SignUp = () => {
