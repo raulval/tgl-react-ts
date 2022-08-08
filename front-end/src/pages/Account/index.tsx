@@ -1,8 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NavBar } from "components";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { MdEast } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { user } from "services";
@@ -33,7 +35,17 @@ const validation = yup.object({
 const Account = () => {
   const { editUserInfo } = user();
   const dispatch = useDispatch();
-  const { userData } = useSelector((state: any) => state.user);
+  const navigate = useNavigate();
+  const { isLogged, userData } = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/");
+      toast.error("You must be logged in to see this page", {
+        toastId: "loginError1",
+      });
+    }
+  }, []);
 
   const {
     register,
