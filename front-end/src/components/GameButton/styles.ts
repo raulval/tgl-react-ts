@@ -19,11 +19,6 @@ export const GamesButton = styled.button<ColorProps>`
   font: italic normal bold 14px ${(props) => props.theme.font};
   color: ${(props) => (props.active ? "#ffffff" : props.color)};
 
-  &:focus {
-    background-color: ${(props) => props.color};
-    color: #fff;
-  }
-
   @media (max-width: 1138px) {
     margin-left: 15px;
   }

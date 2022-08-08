@@ -1,12 +1,13 @@
+import { Bets, GameButton, NavBar } from "components";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Bets from "../../components/Bets";
-import GameButton from "../../components/GameButton";
-import NavBar from "../../components/NavBar";
-import { api } from "../../services/api";
-import { getGames } from "../../store/gameSlice";
+import { bets as betsService } from "services";
+import gamesService from "services/games";
+import { Game, IBets } from "shared/interfaces";
+import { getGames } from "store/gameSlice";
 import {
   ArrowRight,
   BetsPlayedContainer,
@@ -19,37 +20,15 @@ import {
   RecentGames,
 } from "./styles";
 
-interface Bets {
-  id: number;
-  user_id: number;
-  game_id: number;
-  choosen_numbers: string;
-  price: number;
-  created_at: Date;
-  type: {
-    id: number;
-    type: string;
-    color: string;
-  };
-}
-
-interface Games {
-  id: number;
-  type: string;
-  description: string;
-  range: number;
-  price: number;
-  max_number: number;
-  color: string;
-}
-
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [bets, setBets] = useState([]);
-  const [games, setGames] = useState([]);
-  const [gameType, setGameType] = useState<string | null>();
+  const { listGames } = gamesService();
+  const { listBets } = betsService();
   const { isLogged, userData } = useSelector((state: any) => state.user);
+  const [bets, setBets] = useState<IBets[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
+  const [selectedGame, setSelectedGame] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isLogged) {
@@ -60,22 +39,18 @@ const Home = () => {
     }
   }, []);
 
-  let config: {};
+  let config = {};
 
-  if (gameType && isLogged) {
+  if (selectedGame.length > 0 && isLogged) {
     config = {
-      headers: { Authorization: `Bearer ${userData.token.token}` },
-      params: { "type[]": `${gameType}` },
-    };
-  } else if (isLogged) {
-    config = {
-      headers: { Authorization: `Bearer ${userData.token.token}` },
+      params: {
+        "type[]": [...selectedGame],
+      },
     };
   }
 
   useEffect(() => {
-    api
-      .get("cart_games")
+    listGames()
       .then((res) => {
         setGames(res.data.types);
         dispatch(getGames(res.data.types));
@@ -84,13 +59,22 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    api
-      .get("bet/all-bets", config)
+    listBets(config)
       .then((res) => {
         setBets(res.data);
       })
-      .catch((err) => {});
-  }, [gameType]);
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [selectedGame]);
+
+  const onClickGameButton = (game: Game) => {
+    if (selectedGame.includes(game.type)) {
+      setSelectedGame(selectedGame.filter((type) => type !== game.type));
+    } else {
+      setSelectedGame([...selectedGame, game.type]);
+    }
+  };
 
   return (
     <HomeContainer>
@@ -100,12 +84,13 @@ const Home = () => {
         <FiltersContainer>
           <FiltersText>Filters</FiltersText>
           {games.length > 0 ? (
-            games.map((game: Games) => {
+            games.map((game: Game) => {
+              const isActive = selectedGame.includes(game.type) ? true : false;
               return (
                 <GameButton
                   key={game.id}
-                  onFocus={() => setGameType(game.type)}
-                  onBlur={() => setGameType(null)}
+                  onClick={() => onClickGameButton(game)}
+                  active={isActive}
                   type={game.type}
                   color={game.color}
                 />
@@ -121,7 +106,7 @@ const Home = () => {
       </HomeHeader>
       <BetsPlayedContainer>
         {bets.length > 0 ? (
-          bets.map((bet: Bets) => {
+          bets.map((bet: IBets) => {
             return <Bets key={bet.id} data={bet} />;
           })
         ) : (
