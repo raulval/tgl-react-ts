@@ -1,3 +1,4 @@
+import Account from "pages/Account";
 import Bet from "pages/Bet";
 import Home from "pages/Home";
 import Login from "pages/Login";
@@ -21,6 +22,7 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/bet" element={<Bet />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
         <ToastContainer limit={3} />
       </PersistGate>
