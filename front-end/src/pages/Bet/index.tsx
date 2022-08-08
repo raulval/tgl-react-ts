@@ -1,3 +1,10 @@
+import {
+  BetNumbers,
+  CartBets,
+  DeleteModal,
+  GameButton,
+  NavBar,
+} from "components";
 import { useEffect, useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { bets } from "services";
 import { Game, ICartBets } from "shared/interfaces";
 import { cartCurrencyFormat } from "shared/utils";
-import {
-  BetNumbers,
-  CartBets,
-  DeleteModal,
-  GameButton,
-  NavBar,
-} from "../../components";
-import { setBets } from "../../store/betSlice";
+import { setBets } from "store/betSlice";
 import { ArrowRight, NoBet } from "../Home/styles";
 
 import {
