@@ -16,3 +16,8 @@ export interface ISignUpResponse {
   user: User;
   token: Token;
 }
+
+export interface IBodyEditUserInfo {
+  name: string;
+  email: string;
+}

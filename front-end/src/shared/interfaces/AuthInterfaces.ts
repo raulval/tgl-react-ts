@@ -11,7 +11,7 @@ interface Token {
   expires_at: Date;
 }
 
-interface User {
+export interface User {
   id: number;
   email: string;
   is_admin: number;
@@ -20,10 +20,10 @@ interface User {
   token_created_at: Date;
   created_at: Date;
   updated_at: Date;
-  picture: null;
+  picture?: null;
 }
 
-interface LoginData {
+export interface LoginData {
   user: User;
   token: Token;
 }
@@ -32,19 +32,8 @@ export interface ILoginResponse {
   data: LoginData;
 }
 
-interface ResetData {
-  id: number;
-  email: string;
-  is_admin: number;
-  name: string;
-  token: string;
-  token_created_at: Date;
-  created_at: Date;
-  updated_at: Date;
-}
-
 export interface IResetResponse {
-  data: ResetData;
+  data: User;
 }
 
 export interface IChangePasswordResponse {
