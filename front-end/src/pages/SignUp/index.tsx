@@ -19,7 +19,11 @@ const SignUp = () => {
       });
       navigate("/");
     } catch (error: any) {
-      toast.error(error.response.data.error.message);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error.response.data.error.message);
+      }
     }
   };
 
