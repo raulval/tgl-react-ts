@@ -1,8 +1,10 @@
 describe("Sign up user", () => {
+  before(() => {
+    cy.visit("http://localhost:5173/");
+  });
+
   context("When user leaves form blank", () => {
     it("Should not be able to sign up an user and shows errors", () => {
-      cy.visit("http://localhost:5173/");
-
       cy.get(".signup-btn").find("a").click();
 
       cy.get("[name='name']").clear();

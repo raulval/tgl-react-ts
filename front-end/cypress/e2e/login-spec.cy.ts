@@ -1,10 +1,10 @@
 describe("Log in user", () => {
+  before(() => {
+    cy.signup("Teste", "tester@email.com", "123456");
+  });
+
   context("When user types right email and password", () => {
     it("Should be able to log in user", () => {
-      cy.visit("http://localhost:5173/");
-
-      cy.signup("Teste", "test@email.com", "123456");
-
       cy.get("[name='email']").type("test@email.com");
       cy.get("[name='password']").type("123456");
 
