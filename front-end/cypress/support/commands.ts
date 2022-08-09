@@ -19,8 +19,12 @@ declare namespace Cypress {
     /**
      * Custom command to select DOM element by data-cy attribute.
      * @example cy.logout()
+     * @example cy.login(email, password)
+     * @example cy.signup(name, email, password)
      */
     logout(): Chainable<string>;
+    login(email: string, password: string): Chainable<string>;
+    signup(name: string, email: string, password: string): Chainable<string>;
   }
 }
 
@@ -31,6 +35,31 @@ Cypress.Commands.add("logout", () => {
   } else {
     cy.get("a").contains("Log out").click();
   }
+});
+
+Cypress.Commands.add("login", (email, password) => {
+  cy.get("[name='email']").type(email);
+  cy.get("[name='password']").type(password);
+
+  cy.intercept("POST", "**/login").as("logIn");
+
+  cy.get(".submit-btn").find("button").click();
+
+  cy.wait("@logIn").its("response.statusCode").should("be.oneOf", [200]);
+});
+
+Cypress.Commands.add("signup", (name, email, password) => {
+  cy.visit("http://localhost:5173/signup");
+
+  cy.get("[name='name']").type(name);
+  cy.get("[name='email']").type(email);
+  cy.get("[name='password']").type(password);
+
+  cy.intercept("POST", "**/user/create").as("signUp");
+
+  cy.get(".submit-btn").find("button").click();
+
+  cy.wait("@signUp").its("response.statusCode").should("be.oneOf", [200]);
 });
 //
 // -- This is a child command --
