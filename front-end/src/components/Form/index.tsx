@@ -2,7 +2,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { MdEast, MdWest } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { IBodyAuth } from "shared/interfaces";
 import * as yup from "yup";
 import { FormMain } from "./styles";
@@ -52,7 +51,7 @@ const Form = (props: FormProps) => {
   });
 
   const onError = (error: any) => {
-    toast.error("Data is invalid");
+    // toast.error("Data is invalid");
   };
 
   return (
