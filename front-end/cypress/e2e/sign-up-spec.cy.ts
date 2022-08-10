@@ -47,7 +47,7 @@ describe("Sign up user", () => {
       cy.get("[name='password']").clear();
 
       cy.get("[name='name']").type("Test User");
-      cy.get("[name='email']").type("test@email.com");
+      cy.get("[name='email']").type("tester@email.com");
       cy.get("[name='password']").type("123456");
 
       cy.intercept("POST", "**/user/create").as("signUp");

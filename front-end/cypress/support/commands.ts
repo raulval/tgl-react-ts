@@ -22,9 +22,9 @@ declare namespace Cypress {
      * @example cy.login(email, password)
      * @example cy.signup(name, email, password)
      */
-    logout(): Chainable<string>;
-    login(email: string, password: string): Chainable<string>;
-    signup(name: string, email: string, password: string): Chainable<string>;
+    logout(): Chainable<void>;
+    login(email: string, password: string): Chainable<void>;
+    signup(name: string, email: string, password: string): Chainable<void>;
   }
 }
 

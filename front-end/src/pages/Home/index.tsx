@@ -53,7 +53,7 @@ const Home = () => {
     listGames()
       .then((res) => {
         setGames(res.data.types);
-        dispatch(getGames(res.data.types));
+        dispatch(getGames(res.data));
       })
       .catch((err) => {});
   }, []);

@@ -43,9 +43,9 @@ const Bet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { newBet } = bets();
-  const { gamesData } = useSelector((state: { games: any }) => state.games);
+  const { gamesData } = useSelector((state: any) => state.games);
   const { isLogged } = useSelector((state: any) => state.user);
-  const [selectedGame, setSelectedGame] = useState<Game>(gamesData[0]);
+  const [selectedGame, setSelectedGame] = useState<Game>(gamesData.types[0]);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [cartBets, setCartBets] = useState<ICartBets[]>([]);
   const [selectedBet, setSelectedBet] = useState<ICartBets | undefined>();
@@ -152,6 +152,8 @@ const Bet = () => {
       navigate("/home");
       dispatch(setBets(response.bet));
     } catch (error: any) {
+      console.log(error.response.data);
+
       toast.error(error.response.data.message);
     }
   };
@@ -176,8 +178,8 @@ const Bet = () => {
           </MainTitle>
           <ChooseGameText>Choose a game</ChooseGameText>
           <GamesDiv>
-            {gamesData.length > 0 ? (
-              gamesData.map((game: Game) => {
+            {gamesData.types.length > 0 ? (
+              gamesData.types.map((game: Game) => {
                 const isActive = selectedGame.type === game.type ? true : false;
                 return (
                   <GameButton
