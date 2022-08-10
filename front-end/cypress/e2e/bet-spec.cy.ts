@@ -1,6 +1,6 @@
 import { Game } from "../../src/shared/interfaces";
 
-describe("Log out user", () => {
+describe("New bet test", () => {
   before(() => {
     const numberOfEmails = {
       counter: Math.floor(Math.random() * (1000000000 - 1) + 1),
@@ -15,26 +15,27 @@ describe("Log out user", () => {
 
   beforeEach(() => {
     cy.restoreLocalStorage();
-  }),
-    afterEach(() => {
-      cy.saveLocalStorage();
-    }),
-    context("When user bets less than min_cart_value", () => {
-      it("Should not be able to save bets", () => {
-        cy.get("a").contains("New Bet").click();
+  });
+  afterEach(() => {
+    cy.saveLocalStorage();
+  });
 
-        cy.get("button").contains("Complete game").click();
-        cy.get("button").contains("Add to cart").click();
+  context("When user bets less than min_cart_value", () => {
+    it("Should not be able to save bets", () => {
+      cy.get("a").contains("New Bet").click();
 
-        cy.intercept("POST", "**/bet/new-bet").as("newBet");
+      cy.get("button").contains("Complete game").click();
+      cy.get("button").contains("Add to cart").click();
 
-        cy.get("button").contains("Save").click();
+      cy.intercept("POST", "**/bet/new-bet").as("newBet");
 
-        cy.wait("@newBet")
-          .its("response.statusCode")
-          .should("be.oneOf", [401, 400]);
-      });
+      cy.get("button").contains("Save").click();
+
+      cy.wait("@newBet")
+        .its("response.statusCode")
+        .should("be.oneOf", [401, 400]);
     });
+  });
 
   context("When user try to add less than max_number", () => {
     it("Should not be able to save bets", () => {
