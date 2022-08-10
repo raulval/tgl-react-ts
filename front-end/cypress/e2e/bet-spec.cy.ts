@@ -36,6 +36,17 @@ describe("Log out user", () => {
       });
     });
 
+  context("When user try to add less than max_number", () => {
+    it("Should not be able to save bets", () => {
+      cy.get("button[value=1]").click();
+      cy.get("button[value=2]").click();
+
+      cy.get("button").contains("Add to cart").click();
+
+      cy.get(".Toastify__toast--error").should("be.visible");
+    });
+  });
+
   context("When user bets the right amount of random games", () => {
     it("Should be able to save bets", () => {
       const tgl = JSON.parse(localStorage.getItem("persist:TGL"));
