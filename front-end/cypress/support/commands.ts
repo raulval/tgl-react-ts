@@ -21,10 +21,12 @@ declare namespace Cypress {
      * @example cy.logout()
      * @example cy.login(email, password)
      * @example cy.signup(name, email, password)
+     * @example cy.addBets()
      */
     logout(): Chainable<void>;
     login(email: string, password: string): Chainable<void>;
     signup(name: string, email: string, password: string): Chainable<void>;
+    addBets(): Chainable<void>;
   }
 }
 
@@ -61,6 +63,40 @@ Cypress.Commands.add("signup", (name, email, password) => {
 
   cy.wait("@signUp").its("response.statusCode").should("be.oneOf", [200]);
 });
+
+Cypress.Commands.add("addBets", () => {
+  const tgl = JSON.parse(localStorage.getItem("persist:TGL"));
+  console.log(tgl);
+
+  const tglUser = JSON.parse(tgl.user);
+  const tglGames = JSON.parse(tgl.games);
+  console.log(tglGames);
+
+  localStorage.setItem("userToken", tglUser.userData.token.token);
+
+  const min_cart_value = tglGames.gamesData.min_cart_value;
+  const games = tglGames.gamesData.types;
+  let totalValue = 0;
+  console.log(tglGames.gamesData.types);
+
+  cy.get("a").contains("New Bet").click();
+
+  while (totalValue <= min_cart_value) {
+    games.forEach((game: any) => {
+      cy.get("button").contains(game.type).click();
+      cy.get("button").contains("Complete game").click();
+      cy.get("button").contains("Add to cart").click();
+      totalValue += game.price;
+    });
+  }
+
+  cy.intercept("POST", "**/bet/new-bet").as("newBet");
+
+  cy.get("button").contains("Save").click();
+
+  cy.wait("@newBet").its("response.statusCode").should("be.oneOf", [200]);
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
