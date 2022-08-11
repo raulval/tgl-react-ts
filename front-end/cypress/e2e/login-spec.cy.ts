@@ -1,11 +1,11 @@
 describe("Log in user", () => {
   before(() => {
-    cy.signup("Teste", "tester@email.com", "123456");
+    cy.signup("Teste", "tester2@email.com", "123456");
   });
 
   context("When user types right email and password", () => {
     it("Should be able to log in user", () => {
-      cy.get("[name='email']").type("tester@email.com");
+      cy.get("[name='email']").type("tester2@email.com");
       cy.get("[name='password']").type("123456");
 
       cy.intercept("POST", "**/login").as("logIn");

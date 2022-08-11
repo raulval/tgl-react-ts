@@ -1,16 +1,11 @@
-import { Game } from "../../src/shared/interfaces";
+import { Game } from "shared/interfaces";
 
 describe("New bet test", () => {
   before(() => {
-    const numberOfEmails = {
-      counter: Math.floor(Math.random() * (1000000000 - 1) + 1),
-    };
-    function generateEmail(numberOfEmails: { counter: number }) {
-      numberOfEmails.counter++;
-      return `test_user${numberOfEmails.counter}@email.com`;
-    }
-    cy.signup("Teste", generateEmail(numberOfEmails), "123456");
-    cy.login("tester@email.com", "123456");
+    const numberOfEmails = Math.floor(Math.random() * (1000000000 - 1) + 1);
+
+    cy.signup("Teste", `test_user${numberOfEmails}@email.com`, "123456");
+    cy.login(`test_user${numberOfEmails}@email.com`, "123456");
   });
 
   beforeEach(() => {

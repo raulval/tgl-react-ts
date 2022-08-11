@@ -1,6 +1,6 @@
 describe("Reset password", () => {
   before(() => {
-    cy.signup("Teste", "tester@email.com", "123456");
+    cy.signup("Teste", "test@email.com", "123456");
   });
 
   context("When user leaves form blank", () => {
