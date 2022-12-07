@@ -3,21 +3,6 @@ describe("Log in user", () => {
     cy.signup("Teste", "tester2@email.com", "123456");
   });
 
-  context("When user types right email and password", () => {
-    it("Should be able to log in user", () => {
-      cy.get("[name='email']").type("tester2@email.com");
-      cy.get("[name='password']").type("123456");
-
-      cy.intercept("POST", "**/login").as("logIn");
-
-      cy.get(".submit-btn").find("button").click();
-
-      cy.wait("@logIn").its("response.statusCode").should("be.oneOf", [200]);
-
-      cy.logout();
-    });
-  });
-
   context("When user types wrong email and password", () => {
     it("Should not be able to log in user and shows validations", () => {
       cy.get("[name='email']").type("testtt@email.com");
@@ -51,6 +36,24 @@ describe("Log in user", () => {
       cy.get(".submit-btn").find("button").click();
 
       cy.get("span").contains("Invalid Email");
+    });
+  });
+
+  context("When user types right email and password", () => {
+    it("Should be able to log in user", () => {
+      cy.get("[name='email']").clear();
+      cy.get("[name='password']").clear();
+
+      cy.get("[name='email']").type("tester2@email.com");
+      cy.get("[name='password']").type("123456");
+
+      cy.intercept("POST", "**/login").as("logIn");
+
+      cy.get(".submit-btn").find("button").click();
+
+      cy.wait("@logIn").its("response.statusCode").should("be.oneOf", [200]);
+
+      cy.logout();
     });
   });
 });
