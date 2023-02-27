@@ -23,22 +23,6 @@ $ git clone https://github.com/raulval/tgl-react-ts.git && cd tgl-react-ts
 ```
 
 Follow the steps below:
-```bash
-# Open API folder and install dependencies
-$ cd LAB_TGL_API
-$ yarn
-
-# Open your DB (MySQL) according to .env file
-
-# Create migrations
-$ node ace migration:run
-
-# Seed DB
-$ node ace db:seed
-
-# Start API
-node ace serve --watch
-```
 
 ```bash
 
@@ -50,6 +34,9 @@ $ yarn
 $ yarn start
 
 ```
+
+For the back-end clone and follow this repository:
+**https://github.com/raulval/tgl-api-adonis**
 
 ## 📝 License
 
