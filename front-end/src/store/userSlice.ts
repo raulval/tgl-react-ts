@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IResetResponse } from "shared/interfaces";
+import { ISignUpResponse } from "shared/interfaces";
 
 export interface UserState {
   isLogged: boolean;
-  userData: IResetResponse;
+  userData: ISignUpResponse;
 }
 
 const initialState = { isLogged: false, userData: {} };

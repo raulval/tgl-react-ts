@@ -1,12 +1,13 @@
-interface Token {
+export interface Token {
   type: string;
   token: string;
   expires_at: Date;
 }
 
-interface User {
+export interface User {
   email: string;
   name: string;
+  credits: number;
   created_at: Date;
   updated_at: Date;
   id: number;

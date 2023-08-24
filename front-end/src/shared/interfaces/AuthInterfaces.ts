@@ -15,6 +15,7 @@ export interface User {
   id: number;
   email: string;
   is_admin: number;
+  credits: number;
   name: string;
   token: string;
   token_created_at: Date;
