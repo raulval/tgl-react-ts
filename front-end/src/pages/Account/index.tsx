@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { user } from "services";
 import { IBodyEditUserInfo } from "shared/interfaces";
-import { getUser } from "store/userSlice";
+import { getUser, selectUser } from "store/userSlice";
 import * as yup from "yup";
 import profilePic from "../../assets/profile.png";
 import {
@@ -36,7 +36,7 @@ const Account = () => {
   const { editUserInfo } = user();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLogged, userData } = useSelector((state: any) => state.user);
+  const { isLogged, userData } = useSelector(selectUser);
 
   useEffect(() => {
     if (!isLogged) {
@@ -78,16 +78,22 @@ const Account = () => {
         <AccountPictureWrapper>
           <AccountPicture src={profilePic} />
         </AccountPictureWrapper>
-        <NameText>{userData.name}</NameText>
-        <EmailText>{userData.email}</EmailText>
+        <NameText>{userData.user.name}</NameText>
+        <EmailText>{userData.user.email}</EmailText>
         <Separator />
         <EditText>Edit your informations</EditText>
         <FormEdit onSubmit={handleSubmit(onSubmitForm)}>
-          <NameInput placeholder="New name" type="text" {...register("name")} />
+          <NameInput
+            placeholder="Change name"
+            type="text"
+            value={userData.user.name}
+            {...register("name")}
+          />
           {errors.name && <span>{errors.name.message}</span>}
           <EmailInput
-            placeholder="New email"
+            placeholder="Change email"
             type="email"
+            value={userData.user.email}
             {...register("email")}
           />
           {errors.email && <span>{errors.email.message}</span>}
