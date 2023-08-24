@@ -23,7 +23,8 @@ export const GamesButton = styled.button<ColorProps>`
     margin-left: 15px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 500px) {
     width: 90px;
+    margin-left: 10px;
   }
 `;

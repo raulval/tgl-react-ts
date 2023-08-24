@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectUser } from "store/userSlice";
+import { FaCoins } from "react-icons/fa";
 import {
   ArrowRight,
   LeftContainer,
   Logo,
   NavbarContainer,
+  NavbarCredits,
+  NavbarCreditsWrapper,
   NavbarExtendedContainer,
   NavbarInnerContainer,
   NavbarLink,
@@ -15,6 +18,7 @@ import {
   RightContainer,
   Selector,
 } from "./styles";
+import { useTheme } from "styled-components";
 
 interface NavbarProps {
   home?: boolean;
@@ -22,6 +26,8 @@ interface NavbarProps {
 
 const NavBar = (props: NavbarProps) => {
   const dispatch = useDispatch();
+  const { colors } = useTheme();
+  const { userData } = useSelector(selectUser);
   const [extendNavbar, setExtendNavbar] = useState(false);
 
   return (
@@ -34,6 +40,14 @@ const NavBar = (props: NavbarProps) => {
           </Logo>
           {!props.home && <NavbarLink to="/home">Home</NavbarLink>}
         </LeftContainer>
+        <NavbarCreditsWrapper>
+          <NavbarCredits>{userData.user.credits.toFixed(2)}</NavbarCredits>
+          <FaCoins
+            size={20}
+            color={colors.primary.text}
+            style={{ marginLeft: "10px" }}
+          />
+        </NavbarCreditsWrapper>
         <RightContainer>
           <NavbarLinkContainer>
             <NavbarLink to="/account">Account</NavbarLink>

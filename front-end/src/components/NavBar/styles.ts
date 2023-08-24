@@ -19,6 +19,10 @@ export const NavbarContainer = styled.nav`
   @media (min-width: 1138px) {
     height: 80px;
   }
+
+  @media (max-width: 500px) {
+    width: 120vw;
+  }
 `;
 
 export const NavbarInnerContainer = styled.div`
@@ -56,6 +60,23 @@ export const Selector = styled.div`
   width: 107px;
   height: 7px;
   border-radius: 6px;
+`;
+
+export const NavbarCreditsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const NavbarCreditsText = styled.p`
+  font: italic normal bold 22px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
+  text-decoration: none;
+`;
+
+export const NavbarCredits = styled.p`
+  font: italic normal bold 22px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.primary.text};
+  text-decoration: none;
 `;
 
 export const NavbarLink = styled(Link)`
@@ -99,8 +120,8 @@ export const NavbarLinkContainer = styled.div`
 `;
 
 export const OpenLinksButton = styled.button`
-  width: 70px;
-  height: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
   background: none;
   border: none;
   color: ${(props) => props.theme.colors.primary.text};

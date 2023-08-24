@@ -10,9 +10,12 @@ export const BetsContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 35px;
+  margin-left: 8.6rem;
 
   @media (max-width: 1138px) {
     justify-content: center;
+    align-self: center;
+    margin-left: 0;
   }
 `;
 
@@ -38,6 +41,10 @@ export const BetNumbers = styled.p`
   min-height: min-content;
 
   @media (max-width: 1138px) {
+    width: 255px;
+  }
+
+  @media (max-width: 500px) {
     width: 130px;
   }
 `;

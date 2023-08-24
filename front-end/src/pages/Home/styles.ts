@@ -44,6 +44,11 @@ export const FiltersContainer = styled.div`
     margin-left: 0;
     margin-right: 20px;
   }
+
+  @media (max-width: 380px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 export const FiltersText = styled.p`
@@ -80,14 +85,18 @@ export const ArrowRight = styled(MdEast)`
 
 export const BetsPlayedContainer = styled.div`
   width: 100vw;
-  height: 65vh;
   display: flex;
   flex-direction: column;
-  padding-left: 8.6rem;
   margin-top: 35px;
   overflow-y: auto;
 `;
 
 export const NoBet = styled.p`
   font: italic normal bold 20px ${(props) => props.theme.font};
+  margin-left: 8.6rem;
+
+  @media (max-width: 768px) {
+    align-self: center;
+    margin-left: 0;
+  }
 `;
