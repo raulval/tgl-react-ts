@@ -61,12 +61,22 @@ export const GameDescription = styled.p`
   color: ${(props) => props.theme.colors.secundary.text};
 `;
 
-export const NumbersContainer = styled.div``;
+export const NumbersContainer = styled.div`
+  @media (max-width: 500px) {
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    grid-auto-rows: minmax(10px, auto);
+  }
+`;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   margin-top: 44px;
   margin-bottom: 80px;
+
+  @media (max-width: 400px) {
+    margin-left: -10px;
+  }
 `;
 
 export const CompleteGameButton = styled.button`
@@ -137,7 +147,7 @@ export const AddToCartButton = styled.button`
   }
 
   @media (max-width: 880px) {
-    min-width: 100px;
+    min-width: 90px;
   }
 `;
 
@@ -158,7 +168,7 @@ export const CartContainer = styled.div`
 `;
 
 export const Cart = styled.div`
-  width: 340px;
+  width: 420px;
   max-height: 600px;
 
   display: flex;
@@ -168,6 +178,10 @@ export const Cart = styled.div`
   border: 1px solid #e2e2e2;
   border-radius: 10px;
   overflow: unset;
+
+  @media (max-width: 500px) {
+    width: 85vw;
+  }
 `;
 
 export const CartTitle = styled.h1`
@@ -178,10 +192,14 @@ export const CartTitle = styled.h1`
 `;
 
 export const CartBetsContainer = styled.div`
-  width: 317px;
+  width: 410px;
   max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @media (max-width: 500px) {
+    width: 85vw;
+  }
 `;
 
 export const CartTotalPrice = styled.p`
@@ -193,7 +211,7 @@ export const CartTotalPrice = styled.p`
 `;
 
 export const CartSaveButton = styled.button`
-  width: 338px;
+  width: 419px;
   min-height: 96px;
 
   background-color: #f4f4f4;
@@ -207,5 +225,14 @@ export const CartSaveButton = styled.button`
 
   &:hover {
     background-color: rgb(0, 0, 0, 0.1);
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    color: ${(props) => props.theme.colors.secundary.text};
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `;

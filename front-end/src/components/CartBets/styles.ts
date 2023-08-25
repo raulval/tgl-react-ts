@@ -54,7 +54,7 @@ export const Separator = styled.div`
 export const BetsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: 310px;
 `;
 
 export const BetNumbers = styled.p`
