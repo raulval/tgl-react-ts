@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { user } from "services";
 import { IBodyEditUserInfo } from "shared/interfaces";
-import { getUser, selectUser } from "store/userSlice";
+import { setUser, selectUser } from "store/userSlice";
 import * as yup from "yup";
 import profilePic from "../../assets/profile.png";
 import {
@@ -63,7 +63,7 @@ const Account = () => {
       });
       console.log(response.data);
 
-      dispatch(getUser(response.data));
+      dispatch(setUser(response.data));
     } catch (error: any) {
       console.log(error);
 

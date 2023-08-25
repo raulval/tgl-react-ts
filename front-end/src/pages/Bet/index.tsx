@@ -40,6 +40,7 @@ import {
 } from "./styles";
 import { FaCoins } from "react-icons/fa";
 import { useTheme } from "styled-components";
+import { setCredits } from "store/userSlice";
 
 const Bet = () => {
   const navigate = useNavigate();
@@ -153,7 +154,8 @@ const Bet = () => {
       });
       setCartBets([]);
       navigate("/home");
-      dispatch(setBets(response.bet));
+      dispatch(setBets(response.data.bet));
+      dispatch(setCredits(response.data.credits));
     } catch (error: any) {
       console.log(error.response.data);
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { bets as betsService } from "services";
+import { bets as betsService, user } from "services";
 import gamesService from "services/games";
 import { Game, IBets } from "shared/interfaces";
 import { getGames } from "store/gameSlice";
@@ -19,13 +19,15 @@ import {
   NoBet,
   RecentGames,
 } from "./styles";
+import { selectUser, setCredits } from "store/userSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { getUser } = user();
   const { listGames } = gamesService();
   const { listBets } = betsService();
-  const { isLogged } = useSelector((state: any) => state.user);
+  const { isLogged } = useSelector(selectUser);
   const [bets, setBets] = useState<IBets[]>([]);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<string[]>([]);
@@ -37,6 +39,15 @@ const Home = () => {
         toastId: "loginError1",
       });
     }
+    const getUserCredits = async () => {
+      try {
+        const response = await getUser();
+        dispatch(setCredits(response.data.credits));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserCredits();
   }, []);
 
   let config = {};

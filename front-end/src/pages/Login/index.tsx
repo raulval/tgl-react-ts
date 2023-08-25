@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "services";
 import { IBodyAuth } from "shared/interfaces";
-import { getUser, UserState } from "store/userSlice";
+import { setUser, setCredits, UserState } from "store/userSlice";
 import { FormContainer } from "./styles";
 
 const Login = () => {
@@ -22,7 +22,8 @@ const Login = () => {
         pending: "Logging in...",
         success: "Logged in successfully",
       });
-      dispatch(getUser(response.data));
+      dispatch(setUser(response.data));
+      dispatch(setCredits(response.data.user.credits));
       localStorage.setItem("userToken", response.data.token.token);
       navigate("/home");
     } catch (error: any) {

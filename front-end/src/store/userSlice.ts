@@ -4,28 +4,37 @@ import { ISignUpResponse } from "shared/interfaces";
 export interface UserState {
   isLogged: boolean;
   userData: ISignUpResponse;
+  credits: number;
 }
 
-const initialState = { isLogged: false, userData: {} };
+const initialState = {
+  isLogged: false,
+  userData: {},
+  credits: 0,
+};
 
 export const slice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    getUser(state, { payload }) {
+    setUser(state, { payload }) {
       return { ...state, isLogged: true, userData: payload };
     },
-    logout(state) {
+    setCredits(state, { payload }) {
       return {
         ...state,
-        isLogged: false,
-        userData: {},
+        credits: payload,
+      };
+    },
+    logout() {
+      return {
+        ...initialState,
       };
     },
   },
 });
 
-export const { getUser, logout } = slice.actions;
+export const { setUser, logout, setCredits } = slice.actions;
 
 export const selectUser = (state: { user: UserState }) => state.user;
 

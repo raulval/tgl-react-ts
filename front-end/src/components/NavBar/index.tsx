@@ -27,7 +27,8 @@ interface NavbarProps {
 const NavBar = (props: NavbarProps) => {
   const dispatch = useDispatch();
   const { colors } = useTheme();
-  const { userData } = useSelector(selectUser);
+  const user = useSelector(selectUser);
+  const credits = user?.credits || 0;
   const [extendNavbar, setExtendNavbar] = useState(false);
 
   return (
@@ -41,7 +42,7 @@ const NavBar = (props: NavbarProps) => {
           {!props.home && <NavbarLink to="/home">Home</NavbarLink>}
         </LeftContainer>
         <NavbarCreditsWrapper>
-          <NavbarCredits>{userData.user.credits.toFixed(2)}</NavbarCredits>
+          <NavbarCredits>{credits.toFixed(2)}</NavbarCredits>
           <FaCoins
             size={20}
             color={colors.primary.text}
