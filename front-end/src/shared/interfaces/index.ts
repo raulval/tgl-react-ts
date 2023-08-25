@@ -19,4 +19,5 @@ export type {
   IBodyEditUserInfo,
   ISignUpResponse,
   IPayCreditsResponse,
+  IGetUserResponse,
 } from "./UserInterfaces";

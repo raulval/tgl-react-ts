@@ -8,7 +8,10 @@ export interface IBodyBets {
 }
 
 export interface INewBetResponse {
-  bet: Bet[];
+  data: {
+    bet: Bet[];
+    credits: number;
+  };
 }
 
 interface Bet {

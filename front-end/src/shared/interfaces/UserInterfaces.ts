@@ -1,3 +1,5 @@
+import { IBets } from "./BetsInterfaces";
+
 export interface Token {
   type: string;
   token: string;
@@ -11,6 +13,16 @@ export interface User {
   created_at: Date;
   updated_at: Date;
   id: number;
+}
+
+export interface IUser {
+  email: string;
+  name: string;
+  credits: number;
+  created_at: Date;
+  updated_at: Date;
+  id: number;
+  bets: IBets[];
 }
 
 export interface ISignUpResponse {
@@ -30,4 +42,8 @@ export interface IPayCreditsResponse {
   created_at: Date;
   updated_at: Date;
   id: number;
+}
+
+export interface IGetUserResponse {
+  data: IUser;
 }
