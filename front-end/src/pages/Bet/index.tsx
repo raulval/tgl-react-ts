@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { bets, user } from "services";
+import { bets } from "services";
 import { Game, ICartBets } from "shared/interfaces";
 import { cartCurrencyFormat } from "shared/utils";
 import { setBets } from "store/betSlice";
@@ -38,10 +38,13 @@ import {
   MainTitle,
   NumbersContainer,
 } from "./styles";
+import { FaCoins } from "react-icons/fa";
+import { useTheme } from "styled-components";
 
 const Bet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { colors } = useTheme();
   const { newBet } = bets();
   const { gamesData } = useSelector((state: any) => state.games);
   const { isLogged } = useSelector((state: any) => state.user);
@@ -250,6 +253,11 @@ const Bet = () => {
             <CartTotalPrice>
               <Bold>Cart</Bold> Total:{" "}
               {cartBets.length > 0 ? cartCurrencyFormat(cartBets) : "0,00"}
+              <FaCoins
+                size={20}
+                color={colors.primary.text}
+                style={{ marginLeft: "10px" }}
+              />
             </CartTotalPrice>
             <CartSaveButton
               onClick={onClickSaveBets}

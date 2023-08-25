@@ -8,6 +8,8 @@ import {
   BetsWrapper,
   Separator,
 } from "./styles";
+import { FaCoins } from "react-icons/fa";
+import { useTheme } from "styled-components";
 
 interface GameData {
   id: number;
@@ -28,6 +30,7 @@ interface BetsProps {
 }
 
 const Bets = (props: BetsProps) => {
+  const { colors } = useTheme();
   return (
     <BetsContainer>
       <Separator color={props.data.type.color} />
@@ -35,7 +38,13 @@ const Bets = (props: BetsProps) => {
         <BetNumbers>{props.data.choosen_numbers}</BetNumbers>
         <BetDateAndPrice>
           {moment(props.data.created_at).format("L")} - (
-          {currencyFormat(props.data.price)})
+          {currencyFormat(props.data.price)}
+          <FaCoins
+            size={13}
+            color={colors.secundary.text}
+            style={{ marginLeft: "5px" }}
+          />
+          )
         </BetDateAndPrice>
         <BetGameType color={props.data.type.color}>
           {props.data.type.type}
