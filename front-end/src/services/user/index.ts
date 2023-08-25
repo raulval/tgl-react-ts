@@ -2,6 +2,7 @@ import { api } from "services/api";
 import {
   IBodyAuth,
   IBodyEditUserInfo,
+  IPayCreditsResponse,
   IResetResponse,
   ISignUpResponse,
 } from "shared/interfaces";
@@ -17,7 +18,11 @@ const user = (): IUser => {
     return api.put("user/update", body);
   };
 
-  return { signup, editUserInfo };
+  const payCredits = async (credits: number): Promise<IPayCreditsResponse> => {
+    return api.post("user/pay-credits", { credits });
+  };
+
+  return { signup, editUserInfo, payCredits };
 };
 
 export default user;

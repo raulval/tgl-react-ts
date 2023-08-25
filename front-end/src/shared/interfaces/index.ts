@@ -15,4 +15,8 @@ export type {
   INewBetResponse,
 } from "./BetsInterfaces";
 export type { Game, GameData, IListGamesResponse } from "./GamesInterfaces";
-export type { IBodyEditUserInfo, ISignUpResponse } from "./UserInterfaces";
+export type {
+  IBodyEditUserInfo,
+  ISignUpResponse,
+  IPayCreditsResponse,
+} from "./UserInterfaces";

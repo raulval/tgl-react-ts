@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { bets } from "services";
+import { bets, user } from "services";
 import { Game, ICartBets } from "shared/interfaces";
 import { cartCurrencyFormat } from "shared/utils";
 import { setBets } from "store/betSlice";
@@ -154,7 +154,11 @@ const Bet = () => {
     } catch (error: any) {
       console.log(error.response.data);
 
-      toast.error(error.response.data.message);
+      toast.error(
+        error.response.data.message
+          ? error.response.data.message
+          : "Something went wrong!"
+      );
     }
   };
 
@@ -247,7 +251,10 @@ const Bet = () => {
               <Bold>Cart</Bold> Total:{" "}
               {cartBets.length > 0 ? cartCurrencyFormat(cartBets) : "0,00"}
             </CartTotalPrice>
-            <CartSaveButton onClick={onClickSaveBets}>
+            <CartSaveButton
+              onClick={onClickSaveBets}
+              disabled={cartBets.length === 0}
+            >
               Save <ArrowRight />
             </CartSaveButton>
           </Cart>
