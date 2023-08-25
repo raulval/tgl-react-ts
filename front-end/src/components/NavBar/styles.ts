@@ -19,10 +19,6 @@ export const NavbarContainer = styled.nav`
   @media (min-width: 1138px) {
     height: 80px;
   }
-
-  @media (max-width: 500px) {
-    width: 120vw;
-  }
 `;
 
 export const NavbarInnerContainer = styled.div`
@@ -65,6 +61,10 @@ export const Selector = styled.div`
 export const NavbarCreditsWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 500px) {
+    margin-left: 30px;
+  }
 `;
 
 export const NavbarCreditsText = styled.p`
@@ -134,11 +134,12 @@ export const OpenLinksButton = styled.button`
 `;
 
 export const NavbarExtendedContainer = styled.div`
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: 1138px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
