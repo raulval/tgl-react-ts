@@ -244,7 +244,7 @@ const Bet = () => {
               )}
             </CartBetsContainer>
             <CartTotalPrice>
-              <Bold>Cart</Bold> Total: R${" "}
+              <Bold>Cart</Bold> Total:{" "}
               {cartBets.length > 0 ? cartCurrencyFormat(cartBets) : "0,00"}
             </CartTotalPrice>
             <CartSaveButton onClick={onClickSaveBets}>

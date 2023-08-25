@@ -32,7 +32,7 @@ const CartBets = (props: BetsProps) => {
         <BetNumbers>{props.numbers.toString()}</BetNumbers>
         <TypePriceWrapper>
           <BetGameType color={props.color}>{props.type}</BetGameType>
-          <BetPrice>R$ {currencyFormat(props.price)}</BetPrice>
+          <BetPrice>{currencyFormat(props.price)}</BetPrice>
         </TypePriceWrapper>
       </BetsWrapper>
     </BetsContainer>

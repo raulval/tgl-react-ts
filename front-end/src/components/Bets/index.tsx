@@ -34,7 +34,7 @@ const Bets = (props: BetsProps) => {
       <BetsWrapper>
         <BetNumbers>{props.data.choosen_numbers}</BetNumbers>
         <BetDateAndPrice>
-          {moment(props.data.created_at).format("L")} - (R${" "}
+          {moment(props.data.created_at).format("L")} - (
           {currencyFormat(props.data.price)})
         </BetDateAndPrice>
         <BetGameType color={props.data.type.color}>
