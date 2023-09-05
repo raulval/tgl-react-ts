@@ -1,5 +1,5 @@
 import Account from "pages/Account";
-import Bet from "pages/Bet";
+import Lottery from "pages/Lottery";
 import Home from "pages/Home";
 import Login from "pages/Login";
 import NewPassword from "pages/NewPassword";
@@ -21,7 +21,7 @@ const Router = () => {
           <Route path="/new-password" element={<NewPassword />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/bet" element={<Bet />} />
+          <Route path="/lottery" element={<Lottery />} />
           <Route path="/account" element={<Account />} />
         </Routes>
         <ToastContainer limit={3} />

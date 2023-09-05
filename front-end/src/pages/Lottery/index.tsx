@@ -42,7 +42,7 @@ import { FaCoins } from "react-icons/fa";
 import { useTheme } from "styled-components";
 import { setCredits } from "store/userSlice";
 
-const Bet = () => {
+const Lottery = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { colors } = useTheme();
@@ -274,4 +274,4 @@ const Bet = () => {
   );
 };
 
-export default Bet;
+export default Lottery;
