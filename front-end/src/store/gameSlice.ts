@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { GameData } from "shared/interfaces";
 
 export interface GameState {
-  gamesData: {};
+  gamesData: GameData;
 }
 
 const initialState = { gamesData: {} };
