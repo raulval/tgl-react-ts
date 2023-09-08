@@ -1,7 +1,3 @@
-// export interface ILotteryResultsResponse {
-//   data: ILotteryResults[];
-// }
-
 export interface ILotteryResultsResponse {
   name: string;
   date: string;
@@ -9,6 +5,7 @@ export interface ILotteryResultsResponse {
   numbers: number[];
   prizes: Prize[];
   totalPrize: string;
+  lotteryColor: string;
 }
 
 export interface Prize {

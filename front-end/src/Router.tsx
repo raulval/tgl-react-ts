@@ -1,9 +1,12 @@
-import Account from "pages/Account";
-import Lottery from "pages/Lottery";
-import Home from "pages/Home";
-import Login from "pages/Login";
-import NewPassword from "pages/NewPassword";
-import Reset from "pages/Reset";
+import {
+  Login,
+  Reset,
+  NewPassword,
+  Home,
+  Lottery,
+  Account,
+  Results,
+} from "pages";
 import SignUp from "pages/SignUp";
 import { Provider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
@@ -23,6 +26,7 @@ const Router = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/lottery" element={<Lottery />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/results" element={<Results />} />
         </Routes>
         <ToastContainer limit={3} />
       </PersistGate>
