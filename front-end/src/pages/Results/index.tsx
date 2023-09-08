@@ -34,6 +34,7 @@ import {
 } from "./styles";
 import { NoBet } from "pages/Home/styles";
 import { Prize } from "services/results/types";
+import moment from "moment";
 
 const Results = () => {
   const { colors } = useTheme();
@@ -94,7 +95,10 @@ const Results = () => {
               style={{ backgroundColor: lotteryResults?.lotteryColor }}
             >
               <ResultLotteryContestAndDate>
-                Contest {lotteryResults?.contest} | {lotteryResults?.date}
+                Contest {lotteryResults?.contest} |{" "}
+                {moment(lotteryResults?.date, "DD/MM/YYYY").format(
+                  "MM/DD/YYYY"
+                )}
               </ResultLotteryContestAndDate>
               <ResultLotteryName>{lotteryResults?.name}</ResultLotteryName>
               <ResultLotteryPrize>
