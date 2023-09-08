@@ -10,3 +10,7 @@ export const cartCurrencyFormat = (items: ICartBets[]) => {
 export const currencyFormat = (value: number) => {
   return value.toFixed(2).replace(".", ",");
 };
+
+export const removeAccents = (string: string) => {
+  return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
