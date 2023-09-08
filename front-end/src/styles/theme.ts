@@ -9,6 +9,10 @@ const Theme = {
       main: "#27c383",
       text: "#868686",
     },
+    terciary: {
+      text: "#ffffff",
+    },
+    separator: "#e2e2e2",
   },
   font: "'IBM Plex Sans', sans-serif",
 };
