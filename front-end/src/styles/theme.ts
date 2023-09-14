@@ -13,6 +13,7 @@ const Theme = {
       text: "#ffffff",
     },
     separator: "#e2e2e2",
+    leagues: "#8ECDDD",
   },
   font: "'IBM Plex Sans', sans-serif",
 };
