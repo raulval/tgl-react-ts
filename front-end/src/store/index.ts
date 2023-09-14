@@ -4,11 +4,13 @@ import storage from "redux-persist/lib/storage";
 import betsReducer from "./betSlice";
 import gamesReducer from "./gameSlice";
 import userReducer from "./userSlice";
+import leaguesReducer from "./leagueSlice";
 
 const reducers = combineReducers({
   user: userReducer,
   games: gamesReducer,
   bets: betsReducer,
+  leagues: leaguesReducer,
 });
 
 const persistConfig = {
