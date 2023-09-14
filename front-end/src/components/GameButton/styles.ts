@@ -25,6 +25,7 @@ export const GamesButton = styled.button<ColorProps>`
 
   @media (max-width: 500px) {
     width: 90px;
+    height: 40px;
     margin-left: 10px;
   }
 `;
