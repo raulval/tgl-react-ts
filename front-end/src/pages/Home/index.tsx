@@ -1,4 +1,4 @@
-import { Bets, GameButton, NavBar } from "components";
+import { Bets, GameButton, LeagueButton, NavBar } from "components";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,12 +18,16 @@ import {
   RecentGames,
 } from "./styles";
 import { selectUser } from "store/userSlice";
+import { useGetLeagues } from "services/sports";
+import { League } from "services/sports/types";
+import { setLeagues } from "store/leagueSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { listGames } = gamesService();
   const { listBets } = betsService();
   const { isLogged } = useSelector(selectUser);
+  const { data: leaguesData, status: leaguesStatus } = useGetLeagues();
   const [bets, setBets] = useState<IBets[]>([]);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<string[]>([]);
@@ -37,6 +41,12 @@ const Home = () => {
       },
     };
   }
+
+  useEffect(() => {
+    if (leaguesStatus === "success") {
+      dispatch(setLeagues(leaguesData));
+    }
+  }, [leaguesStatus]);
 
   useEffect(() => {
     listGames()
@@ -65,6 +75,16 @@ const Home = () => {
     }
   };
 
+  const onClickLeagueButton = (league: League) => {
+    if (selectedGame.includes(league.short_name)) {
+      setSelectedGame(
+        selectedGame.filter((type) => type !== league.short_name)
+      );
+    } else {
+      setSelectedGame([...selectedGame, league.short_name]);
+    }
+  };
+
   return (
     <HomeContainer>
       <NavBar home />
@@ -88,6 +108,21 @@ const Home = () => {
           ) : (
             <NoBet>No game found, create one first</NoBet>
           )}
+          {leaguesData && leaguesData.leagues.length > 0
+            ? leaguesData.leagues.map((league: League) => {
+                const isActive = selectedGame.includes(league.short_name)
+                  ? true
+                  : false;
+                return (
+                  <LeagueButton
+                    key={league.id}
+                    active={isActive}
+                    onClick={() => onClickLeagueButton(league)}
+                    name={league.name}
+                  />
+                );
+              })
+            : undefined}
         </FiltersContainer>
         {/* <NewBetLink to="/bet">
           New Bet <ArrowRight />

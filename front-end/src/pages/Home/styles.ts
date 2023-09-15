@@ -45,7 +45,12 @@ export const FiltersContainer = styled.div`
     margin-right: 20px;
   }
 
-  @media (max-width: 380px) {
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
     margin-left: 0;
     margin-right: 0;
   }
