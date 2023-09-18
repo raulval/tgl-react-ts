@@ -7,6 +7,7 @@ import GameButton from "./GameButton";
 import NavBar from "./NavBar";
 import Slogan from "./Slogan";
 import LeagueButton from "./LeagueButton";
+import { MatchBetCard } from "./MatchBetCard";
 
 export {
   BetNumbers,
@@ -18,4 +19,5 @@ export {
   Bets,
   Form,
   LeagueButton,
+  MatchBetCard,
 };
