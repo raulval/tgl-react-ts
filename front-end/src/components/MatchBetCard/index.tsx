@@ -87,7 +87,7 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
           const isGuestActive =
             selectedOdd?.odd === match.odds.guest ? true : false;
 
-          const live = match.start_time === new Date().getTime();
+          const live = match.start_time <= new Date().getTime();
           const earnings =
             selectedAmount && selectedOdd && selectedAmount * selectedOdd?.odd;
 
