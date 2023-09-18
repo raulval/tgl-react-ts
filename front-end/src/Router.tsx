@@ -6,6 +6,7 @@ import {
   Lottery,
   Account,
   Results,
+  Sports,
 } from "pages";
 import SignUp from "pages/SignUp";
 import { Provider } from "react-redux";
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/lottery" element={<Lottery />} />
+          <Route path="/sports" element={<Sports />} />
           <Route path="/account" element={<Account />} />
           <Route path="/results" element={<Results />} />
         </Routes>
