@@ -5,5 +5,6 @@ import Lottery from "./Lottery";
 import NewPassword from "./NewPassword";
 import Reset from "./Reset";
 import Results from "./Results";
+import Sports from "./Sports";
 
-export { Home, Account, Login, Lottery, NewPassword, Reset, Results };
+export { Home, Account, Login, Lottery, NewPassword, Reset, Results, Sports };
