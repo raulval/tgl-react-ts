@@ -113,6 +113,8 @@ const Sports = () => {
             }
           );
           dispatch(setCredits(response.credits));
+          setSelectedAmount(undefined);
+          setSelectedOdd(undefined);
         } catch (error: any) {
           console.log(error.response.data);
           toast.error(
