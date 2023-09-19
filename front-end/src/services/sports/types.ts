@@ -37,3 +37,35 @@ export interface IOdds {
   draw: number;
   guest: number;
 }
+
+export interface ICreateBetBody {
+  match_id: string;
+  odd: number;
+  amount: number;
+  picked: string;
+}
+
+export interface ICreateBetResponse {
+  user_id: number;
+  odd: number;
+  amount: number;
+  picked: string;
+  earnings: number;
+  match: IMatch;
+  credits: number;
+}
+
+export type IGetSportBetsResponse = ISportBet[];
+
+export interface ISportBet {
+  id: number;
+  match_id: string;
+  user_id: number;
+  picked: string;
+  odd: number;
+  amount: number;
+  earning: number;
+  created_at: string;
+  updated_at: string;
+  match: IMatch;
+}

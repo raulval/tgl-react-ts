@@ -1,10 +1,18 @@
 import { api } from "services/api";
-import { useQuery } from "@tanstack/react-query";
-import { IGetLeaguesResponse, IGetMatchesResponse } from "./types";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  ICreateBetBody,
+  ICreateBetResponse,
+  IGetLeaguesResponse,
+  IGetMatchesResponse,
+  IGetSportBetsResponse,
+} from "./types";
 
 const API_ENDPOINTS = {
   getLeagues: () => `sports/leagues`,
   getMatches: () => `sports/matches`,
+  createSportBet: () => `sports/new-bet`,
+  getSportBets: () => `sports/bets`,
 };
 
 const useGetLeagues = () => {
@@ -30,9 +38,19 @@ const useGetMatches = (leagueShortName: string) => {
       });
       return data;
     },
-
+    // refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 };
 
-export { useGetLeagues, useGetMatches };
+const useCreateSportBet = () => {
+  return useMutation<ICreateBetResponse, Error, ICreateBetBody>({
+    mutationKey: ["create-sport-bet"],
+    mutationFn: async (body: ICreateBetBody) => {
+      const { data } = await api.post(API_ENDPOINTS.createSportBet(), body);
+      return data;
+    },
+  });
+};
+
+export { useGetLeagues, useGetMatches, useCreateSportBet };
