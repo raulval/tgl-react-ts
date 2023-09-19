@@ -49,7 +49,8 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
     isActive: boolean,
     odd: number,
     picked: string,
-    live: boolean
+    live: boolean,
+    matchName: string
   ) => (
     <CardOddsButton
       onClick={() =>
@@ -59,6 +60,7 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
             : {
                 picked: picked,
                 odd: odd,
+                matchName: matchName,
               }
         )
       }
@@ -81,11 +83,20 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
       ) : matchesData && matchesData.matches.length > 0 ? (
         matchesData.matches.map((match) => {
           const isHomeActive =
-            selectedOdd?.odd === match.odds.home ? true : false;
+            selectedOdd?.odd === match.odds.home &&
+            selectedOdd.matchName === match.name
+              ? true
+              : false;
           const isDrawActive =
-            selectedOdd?.odd === match.odds.draw ? true : false;
+            selectedOdd?.odd === match.odds.draw &&
+            selectedOdd.matchName === match.name
+              ? true
+              : false;
           const isGuestActive =
-            selectedOdd?.odd === match.odds.guest ? true : false;
+            selectedOdd?.odd === match.odds.guest &&
+            selectedOdd.matchName === match.name
+              ? true
+              : false;
 
           const live = match.start_time <= new Date().getTime();
           const earnings =
@@ -114,14 +125,22 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
                     isHomeActive,
                     match.odds.home,
                     match.participants.home,
-                    live
+                    live,
+                    match.name
                   )}
-                  {renderOddButton(isDrawActive, match.odds.draw, "draw", live)}
+                  {renderOddButton(
+                    isDrawActive,
+                    match.odds.draw,
+                    "draw",
+                    live,
+                    match.name
+                  )}
                   {renderOddButton(
                     isGuestActive,
                     match.odds.guest,
                     match.participants.guest,
-                    live
+                    live,
+                    match.name
                   )}
                 </CardOddsContainer>
                 <CardAmountContainer>
