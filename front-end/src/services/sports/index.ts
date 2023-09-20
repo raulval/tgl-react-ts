@@ -38,7 +38,6 @@ const useGetMatches = (leagueShortName: string) => {
       });
       return data;
     },
-    // refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 };
@@ -53,4 +52,20 @@ const useCreateSportBet = () => {
   });
 };
 
-export { useGetLeagues, useGetMatches, useCreateSportBet };
+const useGetSportBets = (leagueNames: string[]) => {
+  return useQuery<IGetSportBetsResponse, Error>({
+    queryKey: ["get-sport-bets"],
+    queryFn: async () => {
+      const { data } = await api.get(API_ENDPOINTS.getSportBets(), {
+        params:
+          {
+            league: leagueNames,
+          } || undefined,
+      });
+      return data;
+    },
+    refetchOnWindowFocus: false,
+  });
+};
+
+export { useGetLeagues, useGetMatches, useCreateSportBet, useGetSportBets };
