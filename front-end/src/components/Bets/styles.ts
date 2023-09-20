@@ -5,7 +5,7 @@ interface ColorProps {
 }
 
 export const BetsContainer = styled.div`
-  width: 45vw;
+  width: 50vw;
   min-height: auto;
   display: flex;
   flex-direction: row;
@@ -13,9 +13,14 @@ export const BetsContainer = styled.div`
   margin-left: 8.6rem;
 
   @media (max-width: 1138px) {
+    width: 45vw;
     justify-content: center;
     align-self: center;
     margin-left: 0;
+  }
+
+  @media (max-width: 500px) {
+    width: 80vw;
   }
 `;
 
@@ -28,6 +33,7 @@ export const Separator = styled.div`
 `;
 
 export const BetsWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -41,16 +47,16 @@ export const BetNumbers = styled.p`
   min-height: min-content;
 
   @media (max-width: 1138px) {
-    width: 255px;
+    width: 40vw;
   }
 
   @media (max-width: 500px) {
-    width: 130px;
+    width: 65vw;
   }
 `;
 
 export const BetDateAndPrice: any = styled.p`
-  font: normal normal normal 17px ${(props) => props.theme.font};
+  font: normal normal italic 17px ${(props) => props.theme.font};
   color: ${(props) => props.theme.colors.secundary.text};
   margin-bottom: 11px;
 `;
