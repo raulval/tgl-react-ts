@@ -1,4 +1,4 @@
-import { Bets, GameButton, LeagueButton, NavBar } from "components";
+import { Bets, GameButton, LeagueButton, NavBar, SportBets } from "components";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +18,8 @@ import {
   RecentGames,
 } from "./styles";
 import { selectUser } from "store/userSlice";
-import { useGetLeagues } from "services/sports";
-import { League } from "services/sports/types";
+import { useGetLeagues, useGetSportBets } from "services/sports";
+import { ISportBet, League } from "services/sports/types";
 import { setLeagues } from "store/leagueSlice";
 
 const Home = () => {
@@ -31,6 +31,8 @@ const Home = () => {
   const [bets, setBets] = useState<IBets[]>([]);
   const [games, setGames] = useState<Game[]>([]);
   const [selectedGame, setSelectedGame] = useState<string[]>([]);
+  const { data: sportBets, refetch: refetchSportBets } =
+    useGetSportBets(selectedGame);
 
   let config = {};
 
@@ -41,6 +43,14 @@ const Home = () => {
       },
     };
   }
+
+  const combinedBets = [...bets, ...(sportBets || [])];
+
+  combinedBets.sort((a, b) => {
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
+    return dateB.getTime() - dateA.getTime();
+  });
 
   useEffect(() => {
     if (leaguesStatus === "success") {
@@ -65,6 +75,7 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
+    refetchSportBets();
   }, [selectedGame]);
 
   const onClickGameButton = (game: Game) => {
@@ -89,7 +100,7 @@ const Home = () => {
     <HomeContainer>
       <NavBar home />
       <HomeHeader>
-        <RecentGames>Recent Games</RecentGames>
+        <RecentGames>Recent Bets</RecentGames>
         <FiltersContainer>
           <FiltersText>Filters</FiltersText>
           {games.length > 0 ? (
@@ -124,14 +135,20 @@ const Home = () => {
               })
             : undefined}
         </FiltersContainer>
-        {/* <NewBetLink to="/bet">
-          New Bet <ArrowRight />
-        </NewBetLink> */}
       </HomeHeader>
       <BetsPlayedContainer>
-        {bets.length > 0 ? (
-          bets.map((bet: IBets) => {
-            return <Bets key={bet.id} data={bet} />;
+        {combinedBets.length > 0 ? (
+          combinedBets.map((item: IBets | ISportBet) => {
+            if ("match_id" in item) {
+              return (
+                <SportBets
+                  key={`${item.id}-${item.match_id}`}
+                  data={item as ISportBet}
+                />
+              );
+            } else {
+              return <Bets key={item.id} data={item as IBets} />;
+            }
           })
         ) : (
           <NoBet>No bets yet, make one!</NoBet>
