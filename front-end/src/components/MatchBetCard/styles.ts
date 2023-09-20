@@ -14,6 +14,7 @@ export const MatchesCard = styled.div`
   padding: 20px;
   gap: 10px;
   justify-content: space-between;
+  background-color: #fff;
 
   @media (max-width: 768px) {
     width: 80vw;
@@ -210,5 +211,31 @@ export const CreditsIcons = styled(FaCoins)`
 
   @media (max-width: 400px) {
     margin-left: 5px;
+  }
+`;
+
+export const LiveCardContainer = styled.div`
+  background-color: red;
+  color: white;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100px;
+  height: 35px;
+
+  @media (max-width: 500px) {
+    width: 75px;
+    height: 25px;
+    padding: 2px;
+  }
+`;
+
+export const LiveCardTitle = styled.h2`
+  font-size: 18px;
+  text-align: center;
+  font-style: italic;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
   }
 `;

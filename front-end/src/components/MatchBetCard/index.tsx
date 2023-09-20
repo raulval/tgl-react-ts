@@ -16,6 +16,8 @@ import {
   CardSaveBet,
   ArrowRight,
   CreditsIcons,
+  LiveCardContainer,
+  LiveCardTitle,
 } from "./styles";
 import { ClipLoader } from "react-spinners";
 import { MatchBetCardProps } from "./types";
@@ -116,6 +118,7 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
                   </CardParticipants>
                 </CardTeamsContainer>
               </CardHeader>
+
               <CardContent>
                 <CardOddsContainer>
                   <CardOddsTeams>1</CardOddsTeams>
@@ -143,6 +146,11 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
                     match.name
                   )}
                 </CardOddsContainer>
+                {live && (
+                  <LiveCardContainer>
+                    <LiveCardTitle>Live</LiveCardTitle>
+                  </LiveCardContainer>
+                )}
                 <CardAmountContainer>
                   {isHomeActive || isDrawActive || isGuestActive ? (
                     <>
