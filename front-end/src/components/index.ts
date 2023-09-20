@@ -8,6 +8,7 @@ import NavBar from "./NavBar";
 import Slogan from "./Slogan";
 import LeagueButton from "./LeagueButton";
 import { MatchBetCard } from "./MatchBetCard";
+import { SportBets } from "./SportBets";
 
 export {
   BetNumbers,
@@ -20,4 +21,5 @@ export {
   Form,
   LeagueButton,
   MatchBetCard,
+  SportBets,
 };
