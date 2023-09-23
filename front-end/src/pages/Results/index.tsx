@@ -4,56 +4,69 @@ import { useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useTheme } from "styled-components";
 
-import { useGetLotteryResults } from "services/results";
+import { useGetLotteryResults, useGetSportResults } from "services/results";
 import { Game } from "shared/interfaces";
 import { selectGames } from "store/gameSlice";
 import { removeAccents } from "shared/utils";
+import { selectLeagues } from "store/leagueSlice";
+import { League } from "services/sports/types";
 
-import { GameButton, NavBar } from "components";
+import {
+  GameButton,
+  LeagueButton,
+  LotteryResultCard,
+  NavBar,
+  SportResultCard,
+} from "components";
 
 import {
   FiltersContainer,
   FiltersText,
   LastResults,
-  ResultBody,
-  ResultCard,
   ResultContainer,
-  ResultLotteryContestAndDate,
-  ResultLotteryHeader,
-  ResultLotteryName,
-  ResultLotteryNumber,
-  ResultLotteryNumbersContainer,
-  ResultLotteryPrize,
-  ResultLotterySeparator,
-  ResultLotteryWinnersTable,
   ResultsContainer,
   ResultsHeader,
-  TableCell,
-  TableHeader,
-  TableRow,
 } from "./styles";
 import { NoBet } from "pages/Home/styles";
-import { Prize } from "services/results/types";
-import moment from "moment";
+import { ISportResult } from "services/results/types";
 
 const Results = () => {
   const { colors } = useTheme();
   const { gamesData } = useSelector(selectGames);
   const [selectedGame, setSelectedGame] = useState(gamesData.types[0].type);
+  const [selectedLeague, setSelectedLeague] = useState("");
   const lotteryName = removeAccents(selectedGame);
+  const { leaguesData } = useSelector(selectLeagues);
   const {
     data: lotteryResults,
     isLoading: isLoadingLotteryResults,
     refetch: refetchLotteryResults,
     isRefetching: isRefetchingLotteryResults,
   } = useGetLotteryResults(lotteryName);
+  const {
+    data: sportResults,
+    isLoading: isLoadingSportResults,
+    refetch: refetchSportResults,
+    isRefetching: isRefetchingSportResults,
+  } = useGetSportResults(selectedLeague || "");
 
   useEffect(() => {
-    refetchLotteryResults();
-  }, [selectedGame]);
+    if (selectedGame) {
+      refetchLotteryResults();
+    }
+    if (selectedLeague) {
+      refetchSportResults();
+    }
+  }, [selectedGame, selectedLeague]);
 
-  const onClickFilterButton = (game: Game) => {
-    setSelectedGame(game.type);
+  const onClickFilterButton = (item: Game | League) => {
+    if ("type" in item) {
+      setSelectedGame(item.type);
+      setSelectedLeague("");
+    } else {
+      setSelectedLeague(item.short_name);
+      setSelectedGame("");
+    }
   };
 
   return (
@@ -79,85 +92,40 @@ const Results = () => {
           ) : (
             <NoBet>No game found, create one first</NoBet>
           )}
+          {leaguesData && leaguesData.leagues.length > 0
+            ? leaguesData.leagues.map((league: League) => {
+                const isActive =
+                  selectedLeague === league.short_name ? true : false;
+                return (
+                  <LeagueButton
+                    key={league.id}
+                    active={isActive}
+                    onClick={() => onClickFilterButton(league)}
+                    name={league.name}
+                  />
+                );
+              })
+            : undefined}
         </FiltersContainer>
       </ResultsHeader>
       <ResultContainer>
-        {isLoadingLotteryResults || isRefetchingLotteryResults ? (
+        {isLoadingLotteryResults ||
+        isRefetchingLotteryResults ||
+        isLoadingSportResults ||
+        isRefetchingSportResults ? (
           <ClipLoader
             color={colors.primary.main}
             loading={true}
             size={40}
             aria-label="Loading Spinner"
           />
-        ) : (
-          <ResultCard>
-            <ResultLotteryHeader
-              style={{ backgroundColor: lotteryResults?.lotteryColor }}
-            >
-              <ResultLotteryContestAndDate>
-                Contest {lotteryResults?.contest} |{" "}
-                {moment(lotteryResults?.date, "DD/MM/YYYY").format(
-                  "MM/DD/YYYY"
-                )}
-              </ResultLotteryContestAndDate>
-              <ResultLotteryName>{lotteryResults?.name}</ResultLotteryName>
-              <ResultLotteryPrize>
-                {lotteryResults?.totalPrize} Millions
-              </ResultLotteryPrize>
-            </ResultLotteryHeader>
-            <ResultBody>
-              <ResultLotteryNumbersContainer>
-                {lotteryResults?.numbers.map((number: number) => (
-                  <ResultLotteryNumber
-                    key={number}
-                    style={{ backgroundColor: lotteryResults.lotteryColor }}
-                  >
-                    {number}
-                  </ResultLotteryNumber>
-                ))}
-              </ResultLotteryNumbersContainer>
-              <ResultLotterySeparator></ResultLotterySeparator>
-              <ResultLotteryWinnersTable>
-                <thead>
-                  <TableRow>
-                    <TableHeader
-                      style={{
-                        backgroundColor: lotteryResults?.lotteryColor,
-                        borderTopLeftRadius: 10,
-                        borderBottomLeftRadius: 10,
-                      }}
-                    >
-                      Scores
-                    </TableHeader>
-                    <TableHeader
-                      style={{ backgroundColor: lotteryResults?.lotteryColor }}
-                    >
-                      Winners
-                    </TableHeader>
-                    <TableHeader
-                      style={{
-                        backgroundColor: lotteryResults?.lotteryColor,
-                        borderTopRightRadius: 10,
-                        borderBottomRightRadius: 10,
-                      }}
-                    >
-                      Prizes
-                    </TableHeader>
-                  </TableRow>
-                </thead>
-                <tbody>
-                  {lotteryResults?.prizes.map((winner: Prize) => (
-                    <TableRow key={winner.scores}>
-                      <TableCell>{winner.scores}</TableCell>
-                      <TableCell>{winner.winners}</TableCell>
-                      <TableCell>{winner.prize}</TableCell>
-                    </TableRow>
-                  ))}
-                </tbody>
-              </ResultLotteryWinnersTable>
-            </ResultBody>
-          </ResultCard>
-        )}
+        ) : selectedGame ? (
+          <LotteryResultCard lotteryResults={lotteryResults} />
+        ) : selectedLeague ? (
+          sportResults?.map((result: ISportResult) => (
+            <SportResultCard sportResult={result} key={result.result.id} />
+          ))
+        ) : null}
       </ResultContainer>
     </ResultsContainer>
   );
