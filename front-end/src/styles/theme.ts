@@ -14,6 +14,8 @@ const Theme = {
     },
     separator: "#e2e2e2",
     leagues: "#4d648d",
+    winner: "#27c383",
+    loser: "#C62828",
   },
   font: "'IBM Plex Sans', sans-serif",
 };
