@@ -9,6 +9,8 @@ import Slogan from "./Slogan";
 import LeagueButton from "./LeagueButton";
 import { MatchBetCard } from "./MatchBetCard";
 import { SportBets } from "./SportBets";
+import { LotteryResultCard } from "./LotteryResultCard";
+import { SportResultCard } from "./SportResultCard";
 
 export {
   BetNumbers,
@@ -22,4 +24,6 @@ export {
   LeagueButton,
   MatchBetCard,
   SportBets,
+  LotteryResultCard,
+  SportResultCard,
 };
