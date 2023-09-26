@@ -66,3 +66,25 @@ export const BetMatch = styled.p`
   font: italic normal bold 20px ${(props) => props.theme.font};
   color: ${({ theme }) => theme.colors.leagues};
 `;
+
+export const CardWinner = styled.p`
+  width: 100px;
+  font: italic normal 500 17px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.terciary.text};
+  background-color: ${(props) => props.theme.colors.winner};
+  border-radius: 10px;
+  text-align: center;
+  padding: 4px 10px;
+  margin-bottom: 5px;
+`;
+
+export const CardLoser = styled.p`
+  width: 100px;
+  font: italic normal 500 17px ${(props) => props.theme.font};
+  color: ${(props) => props.theme.colors.terciary.text};
+  background-color: ${(props) => props.theme.colors.loser};
+  border-radius: 10px;
+  text-align: center;
+  padding: 4px 10px;
+  margin-bottom: 5px;
+`;

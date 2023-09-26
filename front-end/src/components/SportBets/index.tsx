@@ -14,6 +14,8 @@ import {
   BetMatch,
   BetsContentsContainer,
   BetsP,
+  CardLoser,
+  CardWinner,
 } from "./styles";
 import { SportBetsProps } from "./types";
 
@@ -48,6 +50,11 @@ export const SportBets: React.FC<SportBetsProps> = ({ data }) => {
         <BetsContentsContainer>
           <BetDate>{moment(data.match.start_time).format("L - HH:mm")}</BetDate>
         </BetsContentsContainer>
+        {data.status === "won" ? (
+          <CardWinner>You Won</CardWinner>
+        ) : data.status === "lost" ? (
+          <CardLoser>You Lost</CardLoser>
+        ) : null}
 
         <BetMatch>{data.match.name}</BetMatch>
       </BetsWrapper>

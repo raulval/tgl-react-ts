@@ -68,4 +68,5 @@ export interface ISportBet {
   created_at: string;
   updated_at: string;
   match: IMatch;
+  status: "pending" | "won" | "lost";
 }
