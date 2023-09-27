@@ -11,13 +11,11 @@ describe("New bet test", () => {
   beforeEach(() => {
     cy.restoreLocalStorage();
   });
-  afterEach(() => {
-    cy.saveLocalStorage();
-  });
 
   context("When user bets less than min_cart_value", () => {
     it("Should not be able to save bets", () => {
-      cy.get("a").contains("New Bet").click();
+      cy.wait(5000);
+      cy.get("a").contains("Lottery bet").click();
 
       cy.get("button").contains("Complete game").click();
       cy.get("button").contains("Add to cart").click();

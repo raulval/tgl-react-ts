@@ -31,12 +31,8 @@ declare namespace Cypress {
 }
 
 Cypress.Commands.add("logout", () => {
-  if (cy.get("a").contains("Log out").should("not.be.visible")) {
-    cy.get(".sc-ikZpkk").click({ force: true });
-    cy.get("a").contains("Log out").click({ force: true });
-  } else {
-    cy.get("a").contains("Log out").click();
-  }
+  cy.get("a:contains('Log out')").should("be.visible").click({ force: true });
+  cy.location("pathname").should("eq", "/");
 });
 
 Cypress.Commands.add("login", (email, password) => {
@@ -48,6 +44,8 @@ Cypress.Commands.add("login", (email, password) => {
   cy.get(".submit-btn").find("button").click();
 
   cy.wait("@logIn").its("response.statusCode").should("be.oneOf", [200]);
+  cy.wait(1000);
+  cy.saveLocalStorage();
 });
 
 Cypress.Commands.add("signup", (name, email, password) => {

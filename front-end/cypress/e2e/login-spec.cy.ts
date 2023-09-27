@@ -1,4 +1,4 @@
-describe("Log in user", () => {
+describe("Login user", () => {
   before(() => {
     cy.signup("Teste", "tester2@email.com", "123456");
   });
