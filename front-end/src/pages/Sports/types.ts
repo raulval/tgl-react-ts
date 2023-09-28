@@ -7,6 +7,6 @@ export interface ISportBet {
   odd: number;
   matchWinner: string | null;
   finished: boolean;
-  match_id: string;
+  match_id: number;
   user_id: number;
 }

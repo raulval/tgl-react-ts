@@ -29,7 +29,7 @@ export interface IResult {
   score: IScore;
   participants: IParticipants;
   started_date: number;
-  match_id: string;
+  match_id: number;
   created_at: string;
   updated_at: string;
   league: string;
@@ -43,7 +43,7 @@ export interface IScore {
 
 export interface ISportBet {
   id: number;
-  match_id: string;
+  match_id: number;
   user_id: number;
   picked: string;
   odd: number;

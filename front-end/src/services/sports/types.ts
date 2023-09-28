@@ -17,7 +17,7 @@ export interface IGetMatchesResponse {
 }
 
 export interface IMatch {
-  id: string;
+  id: number;
   name: string;
   start_time: number;
   participants: IParticipants;
@@ -39,7 +39,7 @@ export interface IOdds {
 }
 
 export interface ICreateBetBody {
-  match_id: string;
+  match_id: number;
   odd: number;
   amount: number;
   picked: string;
@@ -59,7 +59,7 @@ export type IGetSportBetsResponse = ISportBet[];
 
 export interface ISportBet {
   id: number;
-  match_id: string;
+  match_id: number;
   user_id: number;
   picked: string;
   odd: number;
