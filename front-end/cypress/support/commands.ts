@@ -27,6 +27,7 @@ declare namespace Cypress {
     login(email: string, password: string): Chainable<void>;
     signup(name: string, email: string, password: string): Chainable<void>;
     addBets(): Chainable<void>;
+    addSportBets(): Chainable<void>;
   }
 }
 
@@ -77,7 +78,7 @@ Cypress.Commands.add("addBets", () => {
   let totalValue = 0;
   console.log(tglGames.gamesData.types);
 
-  cy.get("a").contains("New Bet").click();
+  cy.get("a").contains("Lottery bet").click();
 
   while (totalValue <= min_cart_value) {
     games.forEach((game: any) => {
@@ -93,6 +94,37 @@ Cypress.Commands.add("addBets", () => {
   cy.get("button").contains("Save").click();
 
   cy.wait("@newBet").its("response.statusCode").should("be.oneOf", [200]);
+});
+
+Cypress.Commands.add("addSportBets", () => {
+  cy.visit("http://localhost:5173/sports");
+
+  cy.get("[data-test-id='odd-button']").first().click();
+  cy.get("input[type=number]").click();
+  cy.get("input[type=number]").clear();
+  cy.get("input[type=number]").type("1");
+  cy.get("button").contains("Save Bet").click();
+
+  cy.intercept("POST", "**/sports/new-bet").as("newSportBet");
+
+  cy.get("button").contains("Bet!").click();
+
+  cy.wait("@newSportBet").its("response.statusCode").should("be.oneOf", [201]);
+
+  cy.get("button").contains("UEFA Champions League").click();
+  cy.wait(1000);
+
+  cy.get("[data-test-id='odd-button']").first().click();
+  cy.get("input[type=number]").click();
+  cy.get("input[type=number]").clear();
+  cy.get("input[type=number]").type("1");
+  cy.get("button").contains("Save Bet").click();
+
+  cy.intercept("POST", "**/sports/new-bet").as("newSportBet");
+
+  cy.get("button").contains("Bet!").click();
+
+  cy.wait("@newSportBet").its("response.statusCode").should("be.oneOf", [201]);
 });
 
 //
