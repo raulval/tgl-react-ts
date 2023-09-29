@@ -76,7 +76,9 @@ const NavBar = (props: NavbarProps) => {
           <NavbarLink to="/results">Results</NavbarLink>
         </LeftContainer>
         <NavbarCreditsWrapper>
-          <NavbarCredits>{credits.toFixed(2)}</NavbarCredits>
+          <NavbarCredits data-test-id="credits">
+            {credits.toFixed(2)}
+          </NavbarCredits>
           <FaCoins
             size={20}
             color={colors.primary.text}
