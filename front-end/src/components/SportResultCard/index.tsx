@@ -40,7 +40,7 @@ export const SportResultCard: React.FC<SportResultCardProps> = ({
       </CardHeader>
 
       <CardContent>
-        <CardTeamsContainer>
+        <CardTeamsContainer data-testid="match-teams">
           <CardParticipants>{result.participants.home}</CardParticipants>
           <CardScore>{result.score.home}</CardScore>
           <CardX>x</CardX>
