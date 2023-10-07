@@ -29,6 +29,7 @@ import {
 } from "./styles";
 import { NoBet } from "pages/Home/styles";
 import { ISportResult } from "services/results/types";
+import { toast } from "react-toastify";
 
 const Results = () => {
   const { colors } = useTheme();
@@ -42,12 +43,16 @@ const Results = () => {
     isLoading: isLoadingLotteryResults,
     refetch: refetchLotteryResults,
     isRefetching: isRefetchingLotteryResults,
+    isError: isErrorLotteryResults,
+    error: errorLotteryResults,
   } = useGetLotteryResults(lotteryName);
   const {
     data: sportResults,
     isLoading: isLoadingSportResults,
     refetch: refetchSportResults,
     isRefetching: isRefetchingSportResults,
+    isError: isErrorSportResults,
+    error: errorSportResults,
   } = useGetSportResults(selectedLeague || "");
 
   useEffect(() => {
@@ -58,6 +63,15 @@ const Results = () => {
       refetchSportResults();
     }
   }, [selectedGame, selectedLeague]);
+
+  if (isErrorLotteryResults) {
+    //@ts-ignore
+    toast.error(errorLotteryResults.response.data.message);
+  }
+  if (isErrorSportResults) {
+    //@ts-ignore
+    toast.error(errorSportResults.response.data.message);
+  }
 
   const onClickFilterButton = (item: Game | League) => {
     if ("type" in item) {
