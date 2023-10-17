@@ -136,9 +136,15 @@ const Results = () => {
         ) : selectedGame ? (
           <LotteryResultCard lotteryResults={lotteryResults} />
         ) : selectedLeague ? (
-          sportResults?.map((result: ISportResult) => (
-            <SportResultCard sportResult={result} key={result.result.id} />
-          ))
+          <>
+            {sportResults && sportResults.length > 0 ? (
+              sportResults?.map((result: ISportResult) => (
+                <SportResultCard sportResult={result} key={result.result.id} />
+              ))
+            ) : (
+              <NoBet>No results found</NoBet>
+            )}
+          </>
         ) : null}
       </ResultContainer>
     </ResultsContainer>

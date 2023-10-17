@@ -67,6 +67,7 @@ export const MatchBetCard: React.FC<MatchBetCardProps> = ({
         )
       }
       active={isActive}
+      isLive={live}
       disabled={live}
       data-test-id="odd-button"
     >

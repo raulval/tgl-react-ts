@@ -80,12 +80,15 @@ export const CardOddsContainer = styled.div`
   }
 `;
 
-export const CardOddsButton = styled.button<{ active: boolean }>`
+export const CardOddsButton = styled.button<{
+  active: boolean;
+  isLive: boolean;
+}>`
   width: 5.5rem;
   height: 2rem;
   font: italic normal 500 18px ${(props) => props.theme.font};
   border-radius: 10px;
-  cursor: pointer;
+  cursor: ${({ isLive }) => (isLive ? "not-allowed" : "pointer")};
   transition: all 0.2s;
 
   background-color: ${({ theme, active }) =>
