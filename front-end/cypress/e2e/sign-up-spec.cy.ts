@@ -23,6 +23,8 @@ describe("Sign up user", () => {
     "When user types name less than 3 words, invalid email and password less than 6 characters",
     () => {
       it("Should not be able to sign up an user and shows errors", () => {
+        cy.visit("http://localhost:5173/signup");
+
         cy.get("[name='name']").clear();
         cy.get("[name='email']").clear();
         cy.get("[name='password']").clear();
@@ -42,6 +44,8 @@ describe("Sign up user", () => {
 
   context("When user types right name, email and password", () => {
     it("Should be able to sign up an user", () => {
+      cy.visit("http://localhost:5173/signup");
+
       cy.get("[name='name']").clear();
       cy.get("[name='email']").clear();
       cy.get("[name='password']").clear();

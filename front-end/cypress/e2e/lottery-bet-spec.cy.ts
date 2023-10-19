@@ -10,6 +10,7 @@ describe("New bet test", () => {
 
   beforeEach(() => {
     cy.restoreLocalStorage();
+    cy.visit("http://localhost:5173/lottery");
   });
 
   context("When user bets less than min_cart_value", () => {

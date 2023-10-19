@@ -142,7 +142,7 @@ const Results = () => {
                 <SportResultCard sportResult={result} key={result.result.id} />
               ))
             ) : (
-              <NoBet>No results found</NoBet>
+              <NoBet>No recent results found</NoBet>
             )}
           </>
         ) : null}

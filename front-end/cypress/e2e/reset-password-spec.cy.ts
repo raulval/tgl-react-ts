@@ -1,4 +1,4 @@
-describe("Reset password", () => {
+describe("Reset password", { testIsolation: false }, () => {
   before(() => {
     cy.signup("Teste", "test@email.com", "123456");
   });

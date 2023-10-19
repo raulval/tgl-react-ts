@@ -3,6 +3,10 @@ describe("Login user", () => {
     cy.signup("Teste", "tester2@email.com", "123456");
   });
 
+  beforeEach(() => {
+    cy.visit("http://localhost:5173/");
+  });
+
   context("When user types wrong email and password", () => {
     it("Should not be able to log in user and shows validations", () => {
       cy.get("[name='email']").type("testtt@email.com");
@@ -52,7 +56,7 @@ describe("Login user", () => {
       cy.get(".submit-btn").find("button").click();
 
       cy.wait("@logIn").its("response.statusCode").should("be.oneOf", [200]);
-
+      cy.wait(1000);
       cy.logout();
     });
   });

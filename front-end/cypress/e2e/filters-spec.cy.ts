@@ -1,5 +1,3 @@
-import { Game } from "shared/interfaces";
-
 describe("Filters test", () => {
   before(() => {
     const numberOfEmails = Math.floor(Math.random() * (1000000000 - 1) + 1);
