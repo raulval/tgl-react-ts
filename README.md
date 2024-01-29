@@ -11,7 +11,7 @@ The project was developed using the following technologies:
 - [Redux](https://redux.js.org/)
 - [Styled-Components](https://styled-components.com/)
 - [Yup](https://github.com/jquense/yup)
-- [Axios](https://axios-http.com/)
+- [React Query](https://tanstack.com/query/latest)
 - [Vite](https://vitejs.dev/)
 
 ## 🚀 Getting started
